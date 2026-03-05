@@ -3,7 +3,7 @@ import './Button.css';
 const Button = () => {
   return (
     <a 
-      href="/public/pdf/tescv.pdf" 
+      href="/pdf/tescv.pdf" 
       download="CV_Kornelius_Jonathan.pdf" 
       style={{ textDecoration: 'none' }}
     >
