@@ -1,7 +1,6 @@
 //https://ui.aceternity.com/components/sticky-scroll-reveal
 
 import React from "react";
-// import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 import { StickyScroll } from "./ui/StickyScrollReveal";
 
 // 1. Ini adalah komponen kartu tiruan persis seperti gambarmu
