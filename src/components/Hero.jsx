@@ -52,13 +52,13 @@ function Hero() {
       </div>
 
       {/* Kolom Kanan: Profile Card dari React Bits */}
-      <div className="hero-card">
+      <div className="hero-card scale-90">
         <ProfileCard
           name="Kornelius J. M."
           title="Backend Developer"
           handle="kornelius_j"
           status="Online"
-          contactText="Hubungi Saya"
+          contactText="Contact Me"
           avatarUrl="/project-images/FotoProfil.png"
           miniAvatarUrl="/project-images/FotoProfil2.png"
           onContactClick={() => {
