@@ -24,9 +24,7 @@ export default function Footer() {
         </p>
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-slate-600">
-          <span>© 2026 Crafted by Kornelius Jonathan.</span>
-          <span className="hidden sm:block">•</span>
-          <span>Built with React & Aceternity UI.</span>
+          <span>© 2026 Crafted by Kornelius Jonathan.</span>    
         </div>
       </div>
     </footer>

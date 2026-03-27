@@ -28,7 +28,7 @@ function App() {
         <section id="projects">
           <Projects />
         </section>
-        
+
         <Footer />
       </main>
     </div>
