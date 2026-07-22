@@ -27,8 +27,24 @@ const projectsData = [
     description: "Penelitian terapan komparasi algoritma untuk memprediksi kualitas udara di wilayah Pekanbaru. Eksplorasi mendalam menggunakan pendekatan Quantum Machine Learning.",
     techStack: ["Python", "Quantum ML", "Pandas"],
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop",
-    githubLink: "https://github.com/username/air-quality",
+    githubLink: "https://github.com/Kornelius1/Hybrid-Stacking-Ensemble",
     liveLink: "#"
+  },
+  {
+    title: "Strict",
+    description: "Platform dengan arsitektur ketat yang mengutamakan performa tinggi dan struktur kode yang solid.",
+    techStack: ["React", "Node.js", "Tailwind CSS"],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
+    githubLink: "https://github.com/Kornelius1/strict",
+    liveLink: "#"
+  },
+  {
+    title: "Wonderful",
+    description: "Proyek mata kuliah membuat website statis.",
+    tech: ["HTML", "CSS", "Javascript"],
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
+    githubLink: "https://github.com/kornelius/wonderful",
+    liveLink: "https://kornelius1.github.io/Wonderful-Infonesia-PAPSI/"
   }
 ];
 

@@ -16,10 +16,13 @@ function Hero() {
           Kornelius Jonathan
         </h1>
         <p>
-          Selamat datang di portofolio saya. Saat ini saya sedang dalam tahap
-          penyusunan skripsi mengenai model algoritma yang akan digunakan untuk
-          prediksi kualitas udara. Saya suka membangun antarmuka web yang
-          menarik dan interaktif. Mari wujudkan ide cemerlang bersama-sama.
+          Selamat datang di portofolio saya. Saya merupakan lulusann S1 Sistem Informasi Universitas Riau dengan IPK 3,73/4,00 yang memiliki 
+          pengalaman magang di PT Perkebunan Nusantara IV serta pengalaman mengembangkan 
+          aplikasi web menggunakan Laravel, Vue.js, dan REST API. Berpengalaman membangun sistem 
+          reservasi dengan integrasi DOKU Payment Gateway, aplikasi Android, serta penelitian machine 
+          learning menggunakan LightGBM dan Quantum Support Vector Regression (QSVR) untuk 
+          prediksi konsentrasi PM2.5. Memiliki minat berkarier sebagai Backend Developer, Software 
+          Engineer, atau Web Developer.
         </p>
 
         <div className="flex items-center gap-6 mt-8">
