@@ -32,7 +32,7 @@ const projectsData = [
   },
   {
     title: "Strict",
-    description: "Platform dengan arsitektur ketat yang mengutamakan performa tinggi dan struktur kode yang solid.",
+    description: "Package laravel dengan arsitektur ketat yang meningkatkan konsistensi penamaan file (PascasCase/snake_case) dalam kerja sama tim.",
     techStack: ["React", "Node.js", "Tailwind CSS"],
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
     githubLink: "https://github.com/Kornelius1/strict",
@@ -41,9 +41,9 @@ const projectsData = [
   {
     title: "Wonderful",
     description: "Proyek mata kuliah membuat website statis.",
-    tech: ["HTML", "CSS", "Javascript"],
+    techStack: ["HTML", "CSS", "Javascript"],
     image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-    githubLink: "https://github.com/kornelius/wonderful",
+    githubLink: "https://github.com/Kornelius1/Wonderful-Infonesia-PAPSI",
     liveLink: "https://kornelius1.github.io/Wonderful-Infonesia-PAPSI/"
   }
 ];

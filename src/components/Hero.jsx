@@ -16,7 +16,7 @@ function Hero() {
           Kornelius Jonathan
         </h1>
         <p>
-          Selamat datang di portofolio saya. Saya merupakan lulusann S1 Sistem Informasi Universitas Riau dengan IPK 3,73/4,00 yang memiliki 
+          Selamat datang di portofolio saya. Saya merupakan lulusan S1 Sistem Informasi Universitas Riau dengan IPK 3,73/4,00 yang memiliki 
           pengalaman magang di PT Perkebunan Nusantara IV serta pengalaman mengembangkan 
           aplikasi web menggunakan Laravel, Vue.js, dan REST API. Berpengalaman membangun sistem 
           reservasi dengan integrasi DOKU Payment Gateway, aplikasi Android, serta penelitian machine 

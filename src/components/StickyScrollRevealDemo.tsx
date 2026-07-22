@@ -33,7 +33,7 @@ const EducationCard = () => {
             Universitas Riau
           </h3>
           <p className="mt-1 text-sm text-slate-300">
-            Bachelor of Computer Science GPA-3.7
+            Bachelor of Computer Science GPA-3.73
           </p>
           <p className="mt-1 text-xs text-blue-300">
             Aug 2022 - Dec 2025
