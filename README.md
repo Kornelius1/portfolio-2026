@@ -1,6 +1,6 @@
 # Portofolio Pribadi - Kornelius
 
-Selamat datang di repositori kode untuk situs web portofolio pribadi saya. Situs ini dibangun untuk menampilkan profil, keahlian, dan berbagai proyek pengembangan sistem yang telah saya kerjakan sebagai pengembang backend dan mahasiswa Sistem Informasi di Universitas Riau.
+Selamat datang di repositori kode untuk situs web portofolio pribadi saya. Situs ini dibangun untuk menampilkan profil, keahlian, dan berbagai proyek pengembangan sistem yang telah saya kerjakan sebagai pengembang backend dan lulusan Sistem Informasi di Universitas Riau.
 
 ## Teknologi Utama
 
