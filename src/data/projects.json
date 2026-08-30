@@ -1,10 +1,93 @@
 [
-    {
-        "id": 1,
-        "title": "Testing Project",
-        "description": "lorem ipsum",
-        "image": "/project-images/01KHFFDXJ1A8AJGY7KS6FMD7HN.jpg",
-        "link_demo": null,
-        "link_github": null
-    }
+  {
+    "title": "BookNauu",
+    "description": "Smart reservation system managing resources, bookings, users, and business operations, featuring role-based authentication and Google Calendar integration.",
+    "techStack": [
+      "Spring Boot",
+      "React",
+      "TypeScript",
+      "PostgreSQL",
+      "Tailwind CSS"
+    ],
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop",
+    "githubLink": "https://github.com/Kornelius1/BookNauu",
+    "liveLink": "#"
+  },
+  {
+    "title": "AI Spare Parts Procurement",
+    "description": "AI-powered quotation extraction tool processing PDF and XLSX files with part normalization, confidence scoring, PostgreSQL storage, OCR, and local LLM fallback via Ollama.",
+    "techStack": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Ollama",
+      "Docker"
+    ],
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop",
+    "githubLink": "https://github.com/Kornelius1/AI-Spare-Parts-Procurement",
+    "liveLink": "#"
+  },
+  {
+    "title": "BookNauu API Test Framework",
+    "description": "Automated testing framework for BookNauu backend utilizing local AI to generate dynamic test data, covering API and database integration tests with HTML reports.",
+    "techStack": [
+      "Python",
+      "Pytest",
+      "Ollama",
+      "SQLAlchemy",
+      "PostgreSQL"
+    ],
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
+    "githubLink": "https://github.com/Kornelius1/api-test-framework",
+    "liveLink": "#"
+  },
+  {
+    "title": "Air Quality Prediction Model",
+    "description": "Applied research comparing machine learning algorithms for air quality forecasting in Pekanbaru.",
+    "techStack": [
+      "Python",
+      "Machine Learning",
+      "Pandas"
+    ],
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop",
+    "githubLink": "https://github.com/Kornelius1/Hybrid-Stacking-Ensemble",
+    "liveLink": "#"
+  },
+  {
+    "title": "Strict Architecture Package",
+    "description": "Laravel package enforcing strict architectural rules and file naming conventions to improve team consistency.",
+    "techStack": [
+      "Laravel",
+      "PHP"
+    ],
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
+    "githubLink": "https://github.com/Kornelius1/strict",
+    "liveLink": "#"
+  },
+  {
+    "title": "Wonderful",
+    "description": "Academic coursework project showcasing a static website built with core web technologies.",
+    "techStack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
+    "githubLink": "https://github.com/Kornelius1/Wonderful-Infonesia-PAPSI",
+    "liveLink": "https://kornelius1.github.io/Wonderful-Infonesia-PAPSI/"
+  },
+  {
+    "title": "Tarombo",
+    "description": "Interactive family tree visualizer using React Flow and Dagre for automatic hierarchical layouts, generational filtering, and custom relationship nodes.",
+    "techStack": [
+      "React",
+      "TypeScript",
+      "React Flow",
+      "Dagre",
+      "Tailwind CSS"
+    ],
+    "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000&auto=format&fit=crop",
+    "githubLink": "https://github.com/Kornelius1/Tarombo",
+    "liveLink": "https://kornelius1.github.io/Tarombo/"
+  }
 ]

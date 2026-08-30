@@ -64,13 +64,13 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="relative flex h-[30rem] justify-center space-x-10 overflow-y-auto rounded-md p-10 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-900 [&::-webkit-scrollbar-thumb]:bg-slate-700"
+      className="relative flex h-[40rem] justify-center gap-80 overflow-y-auto rounded-md p-10 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-900 [&::-webkit-scrollbar-thumb]:bg-slate-700"
       ref={ref}
     >
       <div className="div relative flex items-start px-4">
         <div className="max-w-2xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-10">
+            <div key={item.title + index} className="my-36">
               <motion.h2
                 initial={{
                   opacity: 0,
@@ -78,7 +78,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-2xl font-bold text-slate-100"
+                className="text-3xl md:text-4xl font-bold text-slate-100"
               >
                 {item.title}
               </motion.h2>
@@ -89,7 +89,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-kg mt-10 max-w-md text-slate-300"
+                className="text-lg md:text-xl text-slate-300 max-w-xl mt-6 leading-relaxed0"
               >
                 {item.description}
               </motion.p>
@@ -101,7 +101,7 @@ export const StickyScroll = ({
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-1/2 -translate-y-1/2 hidden h-80 w-[26rem] md:w-[28rem] overflow-hidden rounded-md bg-white lg:block",
           contentClassName,
         )}
       >

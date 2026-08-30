@@ -11,18 +11,19 @@ function Hero() {
       {/* Kolom Kiri: Teks Portofolio */}
       <div className="hero-text">
         <h1>
-          HALO, SAYA
+          HALO, I'M
           <br />
           Kornelius Jonathan
         </h1>
         <p>
-          Selamat datang di portofolio saya. Saya merupakan lulusan S1 Sistem Informasi Universitas Riau dengan IPK 3,73/4,00 yang memiliki 
-          pengalaman magang di PT Perkebunan Nusantara IV serta pengalaman mengembangkan 
-          aplikasi web menggunakan Laravel, Vue.js, dan REST API. Berpengalaman membangun sistem 
-          reservasi dengan integrasi DOKU Payment Gateway, aplikasi Android, serta penelitian machine 
-          learning menggunakan LightGBM dan Quantum Support Vector Regression (QSVR) untuk 
-          prediksi konsentrasi PM2.5. Memiliki minat berkarier sebagai Backend Developer, Software 
-          Engineer, atau Web Developer.
+          I'm Kornelius Jonathan Manik, an Information Systems graduate from
+          Riau University based in Riau, Indonesia, with a strong focus and
+          passion for backend development and software quality assurance. I
+          enjoy building web services, designing REST APIs, and automating test
+          pipelines using PHP Laravel, Java Spring Boot, Node.js, and Docker.
+          Driven by clean architecture and continuous refinement, I am eager to
+          apply my software engineering foundation and testing practices to
+          deliver reliable, high-performance digital solutions.
         </p>
 
         <div className="flex items-center gap-6 mt-8">

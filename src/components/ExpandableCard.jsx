@@ -6,43 +6,35 @@ import { AnimatePresence, motion } from "motion/react";
 
 const experiences = [
   {
-    title: "Magang Divisi Teknik & Pengolahan",
-    company: "PT. Perkebunan Nusantara IV Persero",
+    title: "Technical & Processing Division Intern",
+    company: "PT Perkebunan Nusantara IV Persero",
     date: "Jan 2025 - Feb 2025",
-    description: "Mengerjakan rekapitulasi data harian dan tugas teknis integrasi sistem pemantauan IoT.",
-    content: "Menjalani masa magang di bawah bimbingan mentor pada Divisi Teknik dan Pengolahan Kantor Regional PT. Perkebunan Nusantara IV Persero, Riau. Tanggung jawab harian mencakup rekapitulasi data operasional secara rutin. Selain itu, saya juga menyelesaikan tugas teknis khusus yang meliputi konfigurasi perangkat pengukur daya, menghubungkannya ke panel Haiwell SCADA, dan menyiarkan data menggunakan protokol MQTT. Aliran data tersebut kemudian ditangkap oleh komputer lokal, disimpan ke dalam basis data, dan divisualisasikan ke dalam bentuk dasbor situs web.",
+    description: "Handled daily data recapitulation and technical IoT system integration.",
+    content: "Managed daily operational data recapitulation at PT Perkebunan Nusantara IV. Configured power meters, integrated them with Haiwell SCADA panels, and broadcasted real-time data via MQTT to a local database and web dashboard.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop"
   },
   {
-    title: "Staf Dirjen Agraria",
-    company: "BEM Kementerian Agraria dan Lingkungan Hidup (2025)",
-    date: "Feb 2025 - Des 2025",
-    description: "Meningkatkan kesadaran mahasiswa terhadap isu agraria dan lingkungan hidup.",
-    content: "The Ministry of Agrarian Affairs and Environment Kemenagraria-LH is the ministry responsible for increasing students' awareness, knowledge, and understanding of their role in addressing agrarian and environmental issues, both on campus, regionally, and nationally, through relevant studies and concrete actions. In carrying out its duties and responsibilities, the Ministry of Agrarian Affairs and Environment consistently coordinates with the Student President and Vice President.",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1000&auto=format&fit=crop" // Gambar tema lingkungan alam
+    title: "Agrarian Affairs Staff Member",
+    company: "BEM Ministry of Agrarian & Environmental Affairs",
+    date: "Feb 2025 - Dec 2025",
+    description: "Raised student awareness on agrarian and environmental issues through studies and action.",
+    content: "Coordinated initiatives to increase student awareness of agrarian and environmental challenges through research studies, policy discussions, and direct community action.",
+    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1000&auto=format&fit=crop"
   },
-  // {
-  //   title: "Full Stack Developer",
-  //   company: "Phourto Project",
-  //   date: "Dec 2025 - Present",
-  //   description: "Membangun sistem reservasi ruangan studio foto interaktif.",
-  //   content: "Mengembangkan Phourto yakni sebuah platform manajemen dan reservasi studio foto. Sistem ini dilengkapi dengan fitur integrasi Google Calendar untuk sinkronisasi jadwal secara otomatis dan notifikasi WhatsApp untuk mengingatkan pelanggan. Infrastruktur di balik layarnya dibangun menggunakan kerangka kerja Laravel 12.25.0 untuk performa maksimal.",
-  //   image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop"
-  // },
   {
     title: "Data & AI Researcher",
     company: "Universitas Riau",
     date: "Sep 2025 - Feb 2026",
-    description: "Penelitian prediksi kualitas udara wilayah Pekanbaru.",
-    content: "Melakukan penelitian mendalam mengenai prediksi kualitas udara di wilayah Pekanbaru. Proyek ini membandingkan berbagai algoritma tingkat lanjut dan mengeksplorasi potensi Quantum Machine Learning guna meningkatkan akurasi sistem prediksi demi memberikan dampak komputasional yang positif bagi lingkungan.",
+    description: "Researched air quality forecasting models for the Pekanbaru region.",
+    content: "Researched air quality forecasting in Pekanbaru by evaluating advanced machine learning ensemble models and exploring Quantum Machine Learning to enhance predictive accuracy.",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
   },
   {
     title: "Web Developer",
     company: "Homey Project",
     date: "2025",
-    description: "Menyelesaikan pengembangan platform digital Homey.",
-    content: "Terlibat penuh dalam merancang dan mengembangkan proyek Homey hingga selesai pada bulan November 2025. Berfokus pada pengubahan ide kompleks menjadi solusi antarmuka digital yang rapi, elegan, dan sangat fungsional bagi para pengguna.",
+    description: "Engineered and delivered the Homey digital platform.",
+    content: "Engineered and delivered the Homey web platform, translating user requirements into a clean, functional digital experience.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
   }
 ];

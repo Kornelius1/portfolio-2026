@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "allowJs": true,
     "paths": {
       "@/*": ["./src/*"]
     }

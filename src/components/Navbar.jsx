@@ -41,8 +41,8 @@ export default function Navbar() {
           {/* Navigasi Desktop */}
           <nav className="desktop-nav">
             <a href="#beranda">Beranda</a>
-            <a href="#about">Tentang</a>
-            <a href="#projects">Proyek</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
           </nav>
 
           <button
@@ -108,10 +108,10 @@ export default function Navbar() {
                 Beranda
               </a>
               <a href="#about" onClick={() => setIsOpen(false)}>
-                Tentang
+                About
               </a>
               <a href="#projects" onClick={() => setIsOpen(false)}>
-                Proyek
+                Projects
               </a>
             </motion.div>
           )}

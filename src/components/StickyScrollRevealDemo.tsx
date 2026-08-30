@@ -1,14 +1,10 @@
-//https://ui.aceternity.com/components/sticky-scroll-reveal
-
 import React from "react";
 import { StickyScroll } from "./ui/StickyScrollReveal";
 
-// 1. Ini adalah komponen kartu tiruan persis seperti gambarmu
 const EducationCard = () => {
   return (
     <div className="flex h-full w-full items-center justify-center bg-[#0f172a] p-6">
       <div className="flex w-full max-w-sm items-center gap-4 rounded-xl border border-slate-700/50 bg-[#151e2e] p-5 shadow-lg">
-        {/* Lingkaran Ikon Topi Toga */}
         <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border border-slate-600 bg-slate-800/50">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,13 +23,12 @@ const EducationCard = () => {
           </svg>
         </div>
 
-        
         <div className="flex flex-col">
-          <h3 className="text-lg font-bold leading-tight text-white">
+          <h3 className="text-xl font-bold leading-tight text-white">
             Universitas Riau
           </h3>
-          <p className="mt-1 text-sm text-slate-300">
-            Bachelor of Computer Science GPA-3.73
+          <p className="mt-1 text-base text-slate-300">
+            Bachelor of Information Systems • GPA 3.73
           </p>
           <p className="mt-1 text-xs text-blue-300">
             Aug 2022 - Dec 2025
@@ -44,37 +39,35 @@ const EducationCard = () => {
   );
 };
 
-// 2. Data konten untuk Sticky Scroll
 const content = [
   {
     title: "About Me",
     description:
-      "Saya adalah pengembang web yang bersemangat membangun antarmuka interaktif dan fungsional. Saat ini saya berfokus mengembangkan model algoritma prediksi kualitas udara di Pekanbaru. Sebelumnya saya juga telah sukses menyelesaikan proyek Homey. Saya selalu antusias mengubah ide kompleks menjadi solusi digital yang rapi dan elegan.",
+      "Information Systems graduate from Universitas Riau passionate about backend development and software quality assurance. Experienced in building web services, designing REST APIs, and automating test pipelines using PHP Laravel, Java Spring Boot, Node.js, and Docker.",
     content: (
-      <div className="flex h-full w-full items-center justify-center rounded-md bg-gradient-to-br from-cyan-500 to-emerald-500 text-3xl font-bold text-white shadow-2xl">
-        Web Developer
+      <div className="flex h-full w-full items-center justify-center rounded-md bg-gradient-to-br from-cyan-500 to-emerald-500 text-2xl font-bold text-white shadow-2xl text-center p-4">
+        Backend & QA
       </div>
     ),
   },
   {
     title: "Education",
     description:
-      "Pendidikan saya sangat berfokus pada penerapan teknologi untuk memecahkan masalah dunia nyata. Saat ini saya sedang tahap menyusun skripsi mengenai prediksi kualitas udara di Pekanbaru. Penelitian ini menuntut saya mendalami pengolahan data dan algoritma tingkat lanjut guna memberikan dampak komputasi yang positif bagi lingkungan.",
-    content: <EducationCard />, // Memanggil kartu pendidikan di sini
+      "Focused on practical software engineering and applied AI research. My undergraduate thesis evaluated machine learning ensemble models for air quality forecasting in Pekanbaru, integrating computational methods to solve environmental challenges.",
+    content: <EducationCard />,
   },
   {
     title: "Beyond the Code",
     description:
-      "Di luar rutinitas menulis kode web standar, saya memiliki ketertarikan besar pada eksplorasi teknologi komputasi masa depan. Saya rutin mempelajari implementasi perbandingan algoritma dan mulai mengeksplorasi potensi quantum machine learning untuk meningkatkan akurasi sistem prediksi pada penelitian yang saya kerjakan.",
+      "Dedicated to clean architecture, automated testing, and open-source contributions. I continuously explore test frameworks, containerized environments, and data pipelines to deliver reliable digital solutions.",
     content: (
-      <div className="flex h-full w-full items-center justify-center rounded-md bg-gradient-to-br from-orange-500 to-yellow-500 text-3xl font-bold text-white shadow-2xl">
-        Quantum ML
+      <div className="flex h-full w-full items-center justify-center rounded-md bg-gradient-to-br from-orange-500 to-yellow-500 text-2xl font-bold text-white shadow-2xl text-center p-4">
+        Testing & Research
       </div>
     ),
   },
 ];
 
-// 3. Ekspor bawaan (default) agar tidak ada layar putih lagi
 export default function StickyScrollRevealDemo() {
   return (
     <div className="w-full bg-[#050505] py-4">

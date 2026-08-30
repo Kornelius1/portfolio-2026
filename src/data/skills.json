@@ -1,0 +1,132 @@
+[
+  {
+    "category": "Frontend Development",
+    "items": [
+      {
+        "title": "React",
+        "icon": "SiReact",
+        "color": [[97, 218, 251]]
+      },
+      {
+        "title": "Vue",
+        "icon": "SiVuedotjs",
+        "color": [[79, 192, 141]]
+      },
+      {
+        "title": "Tailwind",
+        "icon": "SiTailwindcss",
+        "color": [[6, 182, 212]]
+      },
+      {
+        "title": "JavaScript",
+        "icon": "SiJavascript",
+        "color": [[247, 223, 30]]
+      }
+    ]
+  },
+  {
+    "category": "Backend & Database",
+    "items": [
+      {
+        "title": "Laravel",
+        "icon": "SiLaravel",
+        "color": [[255, 45, 32]]
+      },
+      {
+        "title": "Spring Boot",
+        "icon": "SiSpringboot",
+        "color": [[109, 179, 63]]
+      },
+      {
+        "title": "Node.js",
+        "icon": "SiNodedotjs",
+        "color": [[51, 153, 51]]
+      },
+      {
+        "title": "Express",
+        "icon": "SiExpress",
+        "color": [[255, 255, 255]]
+      },
+      {
+        "title": "Python",
+        "icon": "SiPython",
+        "color": [[55, 118, 171]]
+      },
+      {
+        "title": "PostgreSQL",
+        "icon": "SiPostgresql",
+        "color": [[65, 105, 225]]
+      },
+      {
+        "title": "MongoDB",
+        "icon": "SiMongodb",
+        "color": [[71, 162, 72]]
+      },
+      {
+        "title": "Prisma",
+        "icon": "SiPrisma",
+        "color": [[45, 55, 72]]
+      }
+    ]
+  },
+  {
+    "category": "Software QA & Testing",
+    "items": [
+      {
+        "title": "Postman",
+        "icon": "SiPostman",
+        "color": [[255, 108, 55]]
+      },
+      {
+        "title": "Pest",
+        "icon": "SiPhp",
+        "color": [[119, 123, 179]]
+      },
+      {
+        "title": "JUnit",
+        "icon": "SiJunit5",
+        "color": [[37, 162, 203]]
+      }
+    ]
+  },
+  {
+    "category": "DevOps & Version Control",
+    "items": [
+      {
+        "title": "Docker",
+        "icon": "SiDocker",
+        "color": [[36, 150, 237]]
+      },
+      {
+        "title": "Git",
+        "icon": "SiGit",
+        "color": [[240, 80, 50]]
+      },
+      {
+        "title": "GitHub",
+        "icon": "SiGithub",
+        "color": [[255, 255, 255]]
+      }
+    ]
+  },
+  {
+    "category": "Design & Tools",
+    "items": [
+      {
+        "title": "Figma",
+        "icon": "SiFigma",
+        "color": [[242, 78, 30], [162, 89, 255]]
+      },
+      {
+        "title": "Photoshop",
+        "icon": "DiPhotoshop",
+        "color": [[49, 168, 255]]
+      },
+      {
+        "title": "Canva",
+        "icon": "SiCanva",
+        "color": [[0, 196, 204]]
+      }
+    ]
+  }
+]

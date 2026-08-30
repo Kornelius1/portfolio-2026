@@ -18,13 +18,13 @@ export default function Footer() {
         />
 
         <p className="text-slate-400 text-base mt-8 max-w-lg leading-relaxed">
-          Terima kasih telah meluangkan waktu untuk menelusuri perjalanan
-          digital saya. Jangan ragu untuk menghubungi saya jika ada peluang
-          kolaborasi hebat ke depannya!
+          Thank you for taking the time to explore my digital journey. Please
+          feel free to reach out if there are any great collaboration
+          opportunities ahead!
         </p>
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-slate-600">
-          <span>© 2026 Crafted by Kornelius Jonathan.</span>    
+          <span>© 2026 Crafted by Kornelius Jonathan.</span>
         </div>
       </div>
     </footer>
