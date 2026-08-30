@@ -13,14 +13,19 @@
         "color": [[79, 192, 141]]
       },
       {
-        "title": "Tailwind",
-        "icon": "SiTailwindcss",
-        "color": [[6, 182, 212]]
+        "title": "TypeScript",
+        "icon": "SiTypescript",
+        "color": [[49, 120, 198]]
       },
       {
         "title": "JavaScript",
         "icon": "SiJavascript",
         "color": [[247, 223, 30]]
+      },
+      {
+        "title": "Tailwind",
+        "icon": "SiTailwindcss",
+        "color": [[6, 182, 212]]
       }
     ]
   },
@@ -53,6 +58,11 @@
         "color": [[55, 118, 171]]
       },
       {
+        "title": "FastAPI",
+        "icon": "SiFastapi",
+        "color": [[5, 153, 139]]
+      },
+      {
         "title": "PostgreSQL",
         "icon": "SiPostgresql",
         "color": [[65, 105, 225]]
@@ -72,6 +82,21 @@
   {
     "category": "Software QA & Testing",
     "items": [
+      {
+        "title": "Selenium",
+        "icon": "SiSelenium",
+        "color": [[67, 176, 42]]
+      },
+      {
+        "title": "Jira",
+        "icon": "SiJira",
+        "color": [[0, 82, 204]]
+      },
+      {
+        "title": "Pytest",
+        "icon": "SiPytest",
+        "color": [[10, 147, 210]]
+      },
       {
         "title": "Postman",
         "icon": "SiPostman",
@@ -106,6 +131,11 @@
         "title": "GitHub",
         "icon": "SiGithub",
         "color": [[255, 255, 255]]
+      },
+      {
+        "title": "Swagger",
+        "icon": "SiSwagger",
+        "color": [[133, 234, 45]]
       }
     ]
   },
@@ -126,6 +156,16 @@
         "title": "Canva",
         "icon": "SiCanva",
         "color": [[0, 196, 204]]
+      },
+      {
+        "title": "Trello",
+        "icon": "SiTrello",
+        "color": [[0, 121, 191]]
+      },
+      {
+        "title": "Primavera P6",
+        "icon": "GrOracle",
+        "color": [[248, 0, 0]]
       }
     ]
   }

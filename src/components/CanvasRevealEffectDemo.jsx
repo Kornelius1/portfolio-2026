@@ -4,6 +4,7 @@ import React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { CanvasRevealEffect } from "./ui/CanvasRevealEffect";
 import skillsData from "../data/skills.json";
+import { GrOracle } from "react-icons/gr";
 
 import {
   SiPostgresql,
@@ -26,6 +27,13 @@ import {
   SiDocker,
   SiGit,
   SiGithub,
+  SiTypescript,
+  SiFastapi,
+  SiSelenium,
+  SiJira,
+  SiPytest,
+  SiSwagger,
+  SiTrello,
 } from "react-icons/si";
 import { DiPhotoshop } from "react-icons/di";
 
@@ -50,7 +58,15 @@ const iconMap = {
   SiDocker,
   SiGit,
   SiGithub,
+  SiTypescript,
+  SiFastapi,
+  SiSelenium,
+  SiJira,
+  SiPytest,
+  SiSwagger,
   DiPhotoshop,
+  SiTrello,
+  GrOracle,
 };
 
 export default function CanvasRevealEffectDemo() {
