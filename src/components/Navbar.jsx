@@ -125,38 +125,53 @@ export default function Navbar() {
 function StyleSheet() {
   return (
     <style>{`
-      /* ... kode CSS sebelumnya tetap sama ... */
       .header {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         padding-top: 20px;
+
         background: rgba(5, 5, 5, 0.8);
         border-bottom: 1px solid #1d2628;
-        z-index: 100;
+
+        z-index: 120;
+
         backdrop-filter: blur(12px);
+
+        pointer-events: none;
       }
 
       .header-content {
         max-width: 1200px;
         margin: 0 auto;
         height: 60px;
+
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         padding: 0 40px;
+        position: relative;
       }
 
       .logo {
         display: flex;
         align-items: center;
         color: #f5f5f5;
+
+        position: relative;
+        z-index: 130;
+        pointer-events: auto;
       }
 
       .desktop-nav {
         display: flex;
         gap: 32px;
+
+        position: relative;
+        z-index: 130;
+        pointer-events: auto;
       }
 
       .desktop-nav a {
@@ -171,28 +186,33 @@ function StyleSheet() {
         opacity: 1;
       }
 
-      /* CSS BARU UNTUK TOMBOL ANIMASI */
       .mobile-toggle {
-        display: none; /* Sembunyikan di desktop */
+        display: none;
+
         background: none;
         border: none;
         cursor: pointer;
         padding: 0;
+
         width: 24px;
         height: 24px;
-        position: relative; /* Wadah absolut untuk anak-anaknya */
+
+        position: relative;
+        z-index: 130;
+        pointer-events: auto;
       }
 
       .icon-container {
         width: 100%;
         height: 100%;
+
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
       .icon-svg {
-        position: absolute; /* Tumpuk ikon burger dan silang */
+        position: absolute;
         top: 0;
         left: 0;
       }
@@ -201,17 +221,15 @@ function StyleSheet() {
         display: none;
       }
 
-      /* Tampilan Saat Layar Menyusut ke Ukuran HP */
       @media (max-width: 768px) {
         .header-content {
           padding: 0 20px;
         }
-        
+
         .desktop-nav {
           display: none;
         }
 
-        /* Tampilkan tombol toggle di mobile */
         .mobile-toggle {
           display: block;
         }
@@ -219,12 +237,19 @@ function StyleSheet() {
         .mobile-nav {
           display: flex;
           flex-direction: column;
+
           background: rgba(5, 5, 5, 0.95);
           border-top: 1px solid #1d2628;
           border-bottom: 1px solid #1d2628;
+
           padding: 20px;
           gap: 20px;
           align-items: center;
+
+          position: relative;
+          z-index: 100;
+
+          pointer-events: auto;
         }
 
         .mobile-nav a {
@@ -233,7 +258,9 @@ function StyleSheet() {
           font-size: 15px;
           font-weight: 500;
           opacity: 0.8;
+
           transition: opacity 0.2s;
+
           width: 100%;
           text-align: center;
           padding: 10px 0;

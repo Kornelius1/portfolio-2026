@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <div
-      style={{ backgroundColor: "#000", minHeight: "100vh", color: "white" }}
+      style={{ backgroundColor: "#12121a", minHeight: "100vh", color: "white" }}
     >
       <Navbar />
       <main>

@@ -1,8 +1,8 @@
 //https://uiverse.io/sahilxkhadka/rotten-grasshopper-44
 
-import "./Hero.css";
-import ProfileCard from "./ProfileCard";
+import "../css/Hero.css";
 import Button from "./Button";
+import Lanyard from "./Lanyard/Lanyard";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 function Hero() {
@@ -11,27 +11,85 @@ function Hero() {
       {/* Kolom Kiri: Teks Portofolio */}
       <div className="hero-text">
         <h1>
-          HALO, I'M
-          <br />
-          Kornelius Jonathan
-        </h1>
-        <p>
-          I'm Kornelius Jonathan Manik, an Information Systems graduate from
-          Riau University based in Riau, Indonesia, with a strong focus and
-          passion for backend development and software quality assurance. I
-          enjoy building web services, designing REST APIs, and automating test
-          pipelines using PHP Laravel, Java Spring Boot, Node.js, and Docker.
-          Driven by clean architecture and continuous refinement, I am eager to
-          apply my software engineering foundation and testing practices to
-          deliver reliable, high-performance digital solutions.
-        </p>
+          <span className="desktop-title">
+            Hello World!!, I'M
+            <br />
+            Kornelius Jonathan
+          </span>
 
-        <div className="flex items-center gap-6 mt-8">
-          <div className="flex items-center justify-center">
+          <span className="mobile-title">
+            Hello World!!
+            <br />
+            I'M
+            <br />
+            Kornelius
+            <br />
+            Jonathan
+          </span>
+        </h1>
+        <p>You can download my CV here.</p>
+
+        <div className="hero-actions">
+          <div className="cv-button-wrapper">
+            {/* Arrow Desktop */}
+            <svg
+              className="cv-arrow cv-arrow-desktop"
+              viewBox="0 0 300 180"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="
+          M270 20
+          C210 5, 155 15, 135 55
+          C115 95, 105 135, 65 155
+        "
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeDasharray="7 7"
+                strokeLinecap="round"
+                fill="none"
+              />
+
+              <path
+                d="M65 155L70 140M65 155L80 158"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+
+            {/* Arrow Mobile */}
+            <svg
+              className="cv-arrow-mobile"
+              viewBox="0 0 40 100"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M20 5V82"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeDasharray="7 7"
+                strokeLinecap="round"
+              />
+
+              <path
+                d="M12 74L20 84L28 74"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+
             <Button />
           </div>
 
-          <div className="flex items-center gap-5 border-l border-slate-700 pl-6">
+          <div className="hero-socials">
             <a
               href="https://github.com/Kornelius1"
               target="_blank"
@@ -56,21 +114,14 @@ function Hero() {
       </div>
 
       {/* Kolom Kanan: Profile Card dari React Bits */}
-      <div className="hero-card scale-90">
-        <ProfileCard
-          name="Kornelius J. M."
-          title="Backend Developer"
-          handle="kornelius_j"
-          status="Online"
-          contactText="Contact Me"
-          avatarUrl="/project-images/FotoProfil.png"
-          miniAvatarUrl="/project-images/FotoProfil2.png"
-          onContactClick={() => {
-            const email = "korneliusjonathan31@gmail.com";
-            const subject = "Tanya Project";
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}`;
-            window.open(gmailUrl, "_blank");
-          }}
+      <div className="hero-lanyard">
+        <Lanyard
+          position={[0, 0, 15]}
+          gravity={[0, -40, 0]}
+          fov={20}
+          frontImage="/project-images/FotoProfil.png"
+          backImage="/project-images/FotoProfil.png"
+          imageFit="cover"
         />
       </div>
     </section>

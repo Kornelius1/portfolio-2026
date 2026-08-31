@@ -1,13 +1,14 @@
-import "./Button.css";
+import "../css/Button.css";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const Button = () => {
   return (
-    <a
-      href="/pdf/KorneliusJonathanCV.pdf"
-      download="CV_Kornelius_Jonathan.pdf"
-      style={{ textDecoration: "none" }}
-    >
-      <button className="btn-download" type="button">
+    <MagneticButton strength={0.3} maxDistance={50}>
+      <a
+        href="/pdf/KorneliusJonathanCV.pdf"
+        download="CV_Kornelius_Jonathan.pdf"
+        className="btn-download"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -23,10 +24,14 @@ const Button = () => {
             d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12"
           />
         </svg>
+
         Download CV
-        <div className="btn-tooltip">Unduh Resume</div>
-      </button>
-    </a>
+
+        <div className="btn-tooltip">
+          Unduh Resume
+        </div>
+      </a>
+    </MagneticButton>
   );
 };
 

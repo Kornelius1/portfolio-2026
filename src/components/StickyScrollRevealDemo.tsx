@@ -43,7 +43,7 @@ const content = [
   {
     title: "About Me",
     description:
-      "Information Systems graduate from Universitas Riau passionate about backend development and software quality assurance. Experienced in building web services, designing REST APIs, and automating test pipelines using PHP Laravel, Java Spring Boot, Node.js, and Docker.",
+      "Information Systems graduate from Universitas Riau passionate about backend development and software quality assurance. I'm Experienced in building web services, designing REST APIs, and automating test pipelines using FastAPI, PHP Laravel, Java Spring Boot, Node.js, and Docker.",
     content: (
       <div className="flex h-full w-full items-center justify-center rounded-md bg-gradient-to-br from-cyan-500 to-emerald-500 text-2xl font-bold text-white shadow-2xl text-center p-4">
         Backend & QA
@@ -59,10 +59,10 @@ const content = [
   {
     title: "Beyond the Code",
     description:
-      "Dedicated to clean architecture, automated testing, and open-source contributions. I continuously explore test frameworks, containerized environments, and data pipelines to deliver reliable digital solutions.",
+      "I actually enjoy video and image editing, too. It has been really useful for handling extra tasks so far. However, producing high-quality videos requires high-quality equipment, so I have to work hard to get that.",
     content: (
       <div className="flex h-full w-full items-center justify-center rounded-md bg-gradient-to-br from-orange-500 to-yellow-500 text-2xl font-bold text-white shadow-2xl text-center p-4">
-        Testing & Research
+        Video Editing
       </div>
     ),
   },
