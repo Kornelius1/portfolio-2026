@@ -5,7 +5,7 @@ import CanvasRevealEffectDemo from "./components/CanvasRevealEffectDemo";
 import ExpandableCards from "./components/ExpandableCard";
 import Projects from "./components/Projects";
 import Footer from "./components/Footer";
-import "./Index.css"
+import "./index.css"
 
 function App() {
   return (
