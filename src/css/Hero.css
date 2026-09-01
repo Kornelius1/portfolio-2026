@@ -10,9 +10,12 @@ html {
 
 .hero-container {
   position: relative;
+
   display: grid;
   grid-template-columns: 2fr 1fr;
+
   gap: 10px;
+
   align-items: center;
 
   max-width: 1600px;
@@ -44,7 +47,12 @@ html {
   width: 600px;
   height: 1000px;
 
+  /*
+   * Lanyard secara visual berada
+   * di atas navbar.
+   */
   z-index: 110;
+
   pointer-events: auto;
 }
 
@@ -53,8 +61,10 @@ html {
    ========================= */
 
 .hero-text {
-  text-align: left;
   position: relative;
+
+  text-align: left;
+
   z-index: 30;
 }
 
@@ -69,7 +79,8 @@ html {
   line-height: 1;
   letter-spacing: 0;
 
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.15);
 
   transform: rotate(-3deg);
   transform-origin: left center;
@@ -94,6 +105,7 @@ html {
 
 .hero-actions {
   display: flex;
+
   align-items: center;
 
   gap: 24px;
@@ -109,12 +121,13 @@ html {
   position: relative;
 
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 }
 
 /* =========================
-   CV ARROW
+   DESKTOP ARROW
    ========================= */
 
 .cv-arrow {
@@ -141,6 +154,7 @@ html {
 
 .hero-socials {
   display: flex;
+
   align-items: center;
 
   gap: 20px;
@@ -152,6 +166,7 @@ html {
 
 .hero-socials a {
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -166,6 +181,7 @@ html {
 
 .hero-socials a:hover {
   color: white;
+
   transform: scale(1.1);
 }
 
@@ -183,6 +199,7 @@ html {
 
 .hero-card {
   display: flex;
+
   justify-content: center;
   align-items: center;
 
@@ -193,11 +210,12 @@ html {
 
 .hero-card button {
   white-space: nowrap !important;
+
   font-size: 0.8em;
 }
 
 /* =========================
-   TITLE RESPONSIVE
+   TITLE
    ========================= */
 
 .mobile-title {
@@ -207,6 +225,10 @@ html {
 .desktop-title {
   display: inline;
 }
+
+/* =========================
+   MOBILE ARROW
+   ========================= */
 
 .cv-arrow-mobile {
   display: none;
@@ -224,6 +246,7 @@ html {
   color: #d6d3d1;
 
   pointer-events: none;
+
   overflow: visible;
 }
 
@@ -232,6 +255,7 @@ html {
    ===================================================== */
 
 @media (max-width: 768px) {
+
   /* =========================
      TITLE
      ========================= */
@@ -271,29 +295,54 @@ html {
   .hero-lanyard {
     position: absolute;
 
-    top: 0px;
+    /*
+     * Tetap mulai dari atas.
+     * Jangan ubah nilai desktop.
+     */
+    top: 0;
+
     right: -170px;
 
     width: 450px;
-    height: 560px;
 
+    /*
+     * Tinggi diperbesar supaya
+     * tali tidak terpotong.
+     */
+    height: 800px;
+
+    /*
+     * Ukuran lanyard tetap cukup besar.
+     */
     transform: scale(0.7);
+
     transform-origin: top center;
 
-    pointer-events: auto;
+    /*
+     * Visual berada di atas navbar.
+     */
     z-index: 110;
+
+    pointer-events: auto;
   }
 
   /* =========================
      HERO TEXT
-     ========================= */
+     * Tetap berada di bawah
+     * layer lanyard secara visual.
+     * ========================= */
 
   .hero-text {
     position: relative;
+
     z-index: 10;
 
     width: 100%;
   }
+
+  /* =========================
+     TITLE
+     ========================= */
 
   .hero-text h1 {
     font-size: 3rem;
@@ -302,6 +351,10 @@ html {
 
     margin-bottom: 20px;
   }
+
+  /* =========================
+     DESCRIPTION
+     ========================= */
 
   .hero-text p {
     font-size: 1.4rem;
@@ -354,6 +407,7 @@ html {
     color: #d6d3d1;
 
     pointer-events: none;
+
     overflow: visible;
   }
 
@@ -401,7 +455,7 @@ html {
   }
 
   /* =========================
-     ARROW
+     OLD DESKTOP ARROW
      ========================= */
 
   .cv-arrow {
