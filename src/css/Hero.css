@@ -4,6 +4,10 @@ html {
   font-size: 12px;
 }
 
+body {
+  max-width: 100%;
+}
+
 /* =========================
    HERO CONTAINER
    ========================= */
@@ -281,7 +285,7 @@ html {
 
     min-height: 100vh;
 
-    padding: 120px 30px 60px;
+    padding: 120px 20px 60px;
 
     gap: 30px;
 
@@ -301,7 +305,7 @@ html {
      */
     top: 0;
 
-    right: -170px;
+    right: -180px;
 
     width: 450px;
 

@@ -69,9 +69,7 @@ export default function Lanyard({
   lanyardWidth = 1,
 }) {
   const [isMobile, setIsMobile] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.innerWidth < 768,
+    () => typeof window !== "undefined" && window.innerWidth < 768,
   );
 
   useEffect(() => {
@@ -107,36 +105,19 @@ export default function Lanyard({
       }}
     >
       <Canvas
-        camera={{
-          position: position,
-          fov: fov,
-        }}
+        camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{
-          alpha: transparent,
+        gl={{ alpha: transparent }}
+        style={{
+          pointerEvents: "auto",
         }}
         onCreated={({ gl }) =>
-          gl.setClearColor(
-            new THREE.Color(0x000000),
-            transparent ? 0 : 1,
-          )
+          gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
         }
-
-        /*
-         * Canvas sendiri tidak mengambil pointer.
-         * Interaksi card ditangani melalui konfigurasi
-         * pointer-events pada object 3D.
-         */
-        style={{
-          pointerEvents: "none",
-        }}
       >
         <ambientLight intensity={Math.PI} />
 
-        <Physics
-          gravity={gravity}
-          timeStep={isMobile ? 1 / 30 : 1 / 60}
-        >
+        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
           <Band
             isMobile={isMobile}
             frontImage={frontImage}
@@ -221,17 +202,11 @@ function Band({
 
   const { nodes, materials } = useGLTF(cardGLB);
 
-  const texture = useTexture(
-    lanyardImage || lanyard,
-  );
+  const texture = useTexture(lanyardImage || lanyard);
 
-  const frontTex = useTexture(
-    frontImage || BLANK_PIXEL,
-  );
+  const frontTex = useTexture(frontImage || BLANK_PIXEL);
 
-  const backTex = useTexture(
-    backImage || BLANK_PIXEL,
-  );
+  const backTex = useTexture(backImage || BLANK_PIXEL);
 
   // =========================
   // CARD TEXTURE
@@ -260,13 +235,7 @@ function Band({
       return baseMap;
     }
 
-    ctx.drawImage(
-      baseImg,
-      0,
-      0,
-      W,
-      H,
-    );
+    ctx.drawImage(baseImg, 0, 0, W, H);
 
     const drawFitted = (img, rect) => {
       const rx = rect.x * W;
@@ -275,93 +244,50 @@ function Band({
       const rw = rect.w * W;
       const rh = rect.h * H;
 
-      const pick =
-        imageFit === "contain"
-          ? Math.min
-          : Math.max;
+      const pick = imageFit === "contain" ? Math.min : Math.max;
 
-      const scale = pick(
-        rw / img.width,
-        rh / img.height,
-      );
+      const scale = pick(rw / img.width, rh / img.height);
 
       const dw = img.width * scale;
       const dh = img.height * scale;
 
-      const dx =
-        rx + (rw - dw) / 2;
+      const dx = rx + (rw - dw) / 2;
 
-      const dy =
-        ry + (rh - dh) / 2;
+      const dy = ry + (rh - dh) / 2;
 
       ctx.save();
 
       ctx.beginPath();
 
-      ctx.rect(
-        rx,
-        ry,
-        rw,
-        rh,
-      );
+      ctx.rect(rx, ry, rw, rh);
 
       ctx.clip();
 
-      ctx.drawImage(
-        img,
-        dx,
-        dy,
-        dw,
-        dh,
-      );
+      ctx.drawImage(img, dx, dy, dw, dh);
 
       ctx.restore();
     };
 
-    if (
-      frontImage &&
-      frontTex.image
-    ) {
-      drawFitted(
-        frontTex.image,
-        FRONT_UV_RECT,
-      );
+    if (frontImage && frontTex.image) {
+      drawFitted(frontTex.image, FRONT_UV_RECT);
     }
 
-    if (
-      backImage &&
-      backTex.image
-    ) {
-      drawFitted(
-        backTex.image,
-        BACK_UV_RECT,
-      );
+    if (backImage && backTex.image) {
+      drawFitted(backTex.image, BACK_UV_RECT);
     }
 
-    const composite =
-      new THREE.CanvasTexture(
-        canvas,
-      );
+    const composite = new THREE.CanvasTexture(canvas);
 
-    composite.colorSpace =
-      THREE.SRGBColorSpace;
+    composite.colorSpace = THREE.SRGBColorSpace;
 
-    composite.flipY =
-      baseMap.flipY;
+    composite.flipY = baseMap.flipY;
 
     composite.anisotropy = 16;
 
     composite.needsUpdate = true;
 
     return composite;
-  }, [
-    frontImage,
-    backImage,
-    imageFit,
-    frontTex,
-    backTex,
-    materials.base.map,
-  ]);
+  }, [frontImage, backImage, imageFit, frontTex, backTex, materials.base.map]);
 
   // =========================
   // CURVE
@@ -377,54 +303,24 @@ function Band({
       ]),
   );
 
-  const [dragged, drag] =
-    useState(false);
+  const [dragged, drag] = useState(false);
 
-  const [hovered, hover] =
-    useState(false);
+  const [hovered, hover] = useState(false);
 
   // =========================
   // JOINTS
   // =========================
 
-  useRopeJoint(
-    fixed,
-    j1,
-    [
-      [0, 0, 0],
-      [0, 0, 0],
-      1,
-    ],
-  );
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
 
-  useRopeJoint(
-    j1,
-    j2,
-    [
-      [0, 0, 0],
-      [0, 0, 0],
-      1,
-    ],
-  );
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
 
-  useRopeJoint(
-    j2,
-    j3,
-    [
-      [0, 0, 0],
-      [0, 0, 0],
-      1,
-    ],
-  );
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
 
-  useSphericalJoint(
-    j3,
-    card,
-    [
-      [0, 0, 0],
-      [0, 1.5, 0],
-    ],
-  );
+  useSphericalJoint(j3, card, [
+    [0, 0, 0],
+    [0, 1.5, 0],
+  ]);
 
   // =========================
   // CURSOR
@@ -432,153 +328,81 @@ function Band({
 
   useEffect(() => {
     if (hovered) {
-      document.body.style.cursor =
-        dragged
-          ? "grabbing"
-          : "grab";
+      document.body.style.cursor = dragged ? "grabbing" : "grab";
 
       return () => {
-        document.body.style.cursor =
-          "auto";
+        document.body.style.cursor = "auto";
       };
     }
-  }, [
-    hovered,
-    dragged,
-  ]);
+  }, [hovered, dragged]);
 
   // =========================
   // FRAME
   // =========================
 
-  useFrame(
-    (state, delta) => {
-      if (dragged) {
-        vec
-          .set(
-            state.pointer.x,
-            state.pointer.y,
-            0.5,
-          )
-          .unproject(
-            state.camera,
+  useFrame((state, delta) => {
+    if (dragged) {
+      vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
+
+      dir.copy(vec).sub(state.camera.position).normalize();
+
+      vec.add(dir.multiplyScalar(state.camera.position.length()));
+
+      [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
+
+      card.current?.setNextKinematicTranslation({
+        x: vec.x - dragged.x,
+
+        y: vec.y - dragged.y,
+
+        z: vec.z - dragged.z,
+      });
+    }
+
+    if (fixed.current) {
+      [j1, j2].forEach((ref) => {
+        if (!ref.current.lerped) {
+          ref.current.lerped = new THREE.Vector3().copy(
+            ref.current.translation(),
           );
+        }
 
-        dir
-          .copy(vec)
-          .sub(
-            state.camera.position,
-          )
-          .normalize();
-
-        vec.add(
-          dir.multiplyScalar(
-            state.camera.position.length(),
-          ),
+        const clampedDistance = Math.max(
+          0.1,
+          Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())),
         );
 
-        [
-          card,
-          j1,
-          j2,
-          j3,
-          fixed,
-        ].forEach((ref) =>
-          ref.current?.wakeUp(),
+        ref.current.lerped.lerp(
+          ref.current.translation(),
+          delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)),
         );
+      });
 
-        card.current?.setNextKinematicTranslation(
-          {
-            x:
-              vec.x - dragged.x,
+      curve.points[0].copy(j3.current.translation());
 
-            y:
-              vec.y - dragged.y,
+      curve.points[1].copy(j2.current.lerped);
 
-            z:
-              vec.z - dragged.z,
-          },
-        );
-      }
+      curve.points[2].copy(j1.current.lerped);
 
-      if (fixed.current) {
-        [j1, j2].forEach(
-          (ref) => {
-            if (
-              !ref.current.lerped
-            ) {
-              ref.current.lerped =
-                new THREE.Vector3().copy(
-                  ref.current.translation(),
-                );
-            }
+      curve.points[3].copy(fixed.current.translation());
 
-            const clampedDistance =
-              Math.max(
-                0.1,
-                Math.min(
-                  1,
-                  ref.current.lerped.distanceTo(
-                    ref.current.translation(),
-                  ),
-                ),
-              );
+      band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
 
-            ref.current.lerped.lerp(
-              ref.current.translation(),
-              delta *
-                (minSpeed +
-                  clampedDistance *
-                    (maxSpeed -
-                      minSpeed)),
-            );
-          },
-        );
+      ang.copy(card.current.angvel());
 
-        curve.points[0].copy(
-          j3.current.translation(),
-        );
+      rot.copy(card.current.rotation());
 
-        curve.points[1].copy(
-          j2.current.lerped,
-        );
-
-        curve.points[2].copy(
-          j1.current.lerped,
-        );
-
-        curve.points[3].copy(
-          fixed.current.translation(),
-        );
-
-        band.current.geometry.setPoints(
-          curve.getPoints(
-            isMobile ? 16 : 32,
-          ),
-        );
-
-        ang.copy(
-          card.current.angvel(),
-        );
-
-        rot.copy(
-          card.current.rotation(),
-        );
-
-        card.current.setAngvel({
-          x: ang.x,
-          y: ang.y - rot.y * 0.25,
-          z: ang.z,
-        });
-      }
-    },
-  );
+      card.current.setAngvel({
+        x: ang.x,
+        y: ang.y - rot.y * 0.25,
+        z: ang.z,
+      });
+    }
+  });
 
   curve.curveType = "chordal";
 
-  texture.wrapS =
-    texture.wrapT =
-    THREE.RepeatWrapping;
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
   // =========================
   // RENDER
@@ -588,34 +412,18 @@ function Band({
     <>
       <group position={[0, 4, 0]}>
         {/* Fixed point */}
-        <RigidBody
-          ref={fixed}
-          {...segmentProps}
-          type="fixed"
-        />
+        <RigidBody ref={fixed} {...segmentProps} type="fixed" />
 
         {/* Rope joints */}
-        <RigidBody
-          position={[0.8, 0, 0]}
-          ref={j1}
-          {...segmentProps}
-        >
+        <RigidBody position={[0.8, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
 
-        <RigidBody
-          position={[1.6, 0, 0]}
-          ref={j2}
-          {...segmentProps}
-        >
+        <RigidBody position={[1.6, 0, 0]} ref={j2} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
 
-        <RigidBody
-          position={[2.4, 0, 0]}
-          ref={j3}
-          {...segmentProps}
-        >
+        <RigidBody position={[2.4, 0, 0]} ref={j3} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
 
@@ -624,112 +432,57 @@ function Band({
           position={[2, 0, 0]}
           ref={card}
           {...segmentProps}
-          type={
-            dragged
-              ? "kinematicPosition"
-              : "dynamic"
-          }
+          type={dragged ? "kinematicPosition" : "dynamic"}
         >
-          <CuboidCollider
-            args={[
-              0.8,
-              1.125,
-              0.01,
-            ]}
-          />
+          <CuboidCollider args={[0.8, 1.125, 0.01]} />
 
           <group
             scale={2.25}
-            position={[
-              0,
-              -1.2,
-              -0.05,
-            ]}
-            rotation={[
-              0,
-              Math.PI,
-              0,
-            ]}
-
+            position={[0, -1.2, -0.05]}
+            rotation={[0, Math.PI, 0]}
             /*
              * Card tetap menjadi area
              * interaksi Lanyard.
              */
-            onPointerOver={() =>
-              hover(true)
-            }
-
-            onPointerOut={() =>
-              hover(false)
-            }
-
+            onPointerOver={() => hover(true)}
+            onPointerOut={() => hover(false)}
             onPointerUp={(e) => {
               e.stopPropagation();
 
-              e.target.releasePointerCapture(
-                e.pointerId,
-              );
+              e.target.releasePointerCapture(e.pointerId);
 
               drag(false);
             }}
-
             onPointerDown={(e) => {
               e.stopPropagation();
 
-              e.target.setPointerCapture(
-                e.pointerId,
-              );
+              e.target.setPointerCapture(e.pointerId);
 
               drag(
                 new THREE.Vector3()
                   .copy(e.point)
-                  .sub(
-                    vec.copy(
-                      card.current.translation(),
-                    ),
-                  ),
+                  .sub(vec.copy(card.current.translation())),
               );
             }}
           >
-            <mesh
-              geometry={
-                nodes.card.geometry
-              }
-            >
+            <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial
                 map={cardMap}
                 map-anisotropy={16}
-                clearcoat={
-                  isMobile ? 0 : 1
-                }
-                clearcoatRoughness={
-                  0.15
-                }
+                clearcoat={isMobile ? 0 : 1}
+                clearcoatRoughness={0.15}
                 roughness={0.9}
                 metalness={0.8}
               />
             </mesh>
 
             <mesh
-              geometry={
-                nodes.clip.geometry
-              }
-              material={
-                materials.metal
-              }
-              material-roughness={
-                0.3
-              }
+              geometry={nodes.clip.geometry}
+              material={materials.metal}
+              material-roughness={0.3}
             />
 
-            <mesh
-              geometry={
-                nodes.clamp.geometry
-              }
-              material={
-                materials.metal
-              }
-            />
+            <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
           </group>
         </RigidBody>
       </group>
@@ -741,11 +494,7 @@ function Band({
         <meshLineMaterial
           color="white"
           depthTest={false}
-          resolution={
-            isMobile
-              ? [1000, 2000]
-              : [1000, 1000]
-          }
+          resolution={isMobile ? [1000, 2000] : [1000, 1000]}
           useMap
           map={texture}
           repeat={[-4, 1]}

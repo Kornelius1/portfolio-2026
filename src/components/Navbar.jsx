@@ -13,25 +13,39 @@ export default function Navbar() {
 
   const [hidden, setHidden] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isHoveringNavbar, setIsHoveringNavbar] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (current) => {
     const previous = scrollY.getPrevious() ?? 0;
 
-    if (current > previous && current > 150 && !isOpen) {
+    if (isOpen) {
+      setHidden(false);
+      return;
+    }
+
+    if (current > previous && current > 150) {
       setHidden(true);
     } else {
       setHidden(false);
     }
   });
 
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+    setHidden(false);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
+      {/* =====================================================
+          NAVBAR
+      ===================================================== */}
+
       <motion.header
         className="header"
-        style={{
-          zIndex: isHoveringNavbar ? 200 : 100,
-        }}
         animate={{
           y: hidden ? -140 : 0,
           opacity: hidden ? 0 : 1,
@@ -40,45 +54,17 @@ export default function Navbar() {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        onMouseEnter={() => setIsHoveringNavbar(true)}
-        onMouseLeave={() => setIsHoveringNavbar(false)}
-        onTouchStart={() => setIsHoveringNavbar(true)}
       >
         <div className="header-content">
-          {/* =========================
-              LOGO
-          ========================= */}
-          <div className="logo">
-            <h2
-              style={{
-                margin: 0,
-                fontSize: "1.5rem",
-                fontWeight: "bold",
-              }}
-            >
-              PORTFOLIO
-            </h2>
-          </div>
 
-          {/* =========================
-              DESKTOP NAVIGATION
-          ========================= */}
-          <nav className="desktop-nav">
-            <a href="#beranda">Beranda</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-          </nav>
+          {/* =================================================
+              MOBILE BURGER
+          ================================================= */}
 
-          {/* =========================
-              MOBILE TOGGLE
-          ========================= */}
           <button
             className="mobile-toggle"
-            onClick={() => {
-              setIsOpen((prev) => !prev);
-              setIsHoveringNavbar(true);
-            }}
-            aria-label="Toggle Menu"
+            onClick={toggleMenu}
+            aria-label={isOpen ? "Close Menu" : "Open Menu"}
             aria-expanded={isOpen}
           >
             <motion.div
@@ -87,18 +73,20 @@ export default function Navbar() {
                 rotate: isOpen ? 180 : 0,
               }}
               transition={{
-                duration: 0.3,
-                ease: "easeInOut",
+                duration: 0.4,
+                ease: [0.22, 1, 0.36, 1],
               }}
             >
               {/* BURGER */}
+
               <motion.svg
                 className="icon-svg"
                 animate={{
                   opacity: isOpen ? 0 : 1,
+                  scale: isOpen ? 0.7 : 1,
                 }}
                 transition={{
-                  duration: 0.3,
+                  duration: 0.25,
                 }}
                 width="24"
                 height="24"
@@ -115,13 +103,15 @@ export default function Navbar() {
               </motion.svg>
 
               {/* CLOSE */}
+
               <motion.svg
-                className="icon-svg cross-icon"
+                className="icon-svg"
                 animate={{
                   opacity: isOpen ? 1 : 0,
+                  scale: isOpen ? 1 : 0.7,
                 }}
                 transition={{
-                  duration: 0.3,
+                  duration: 0.25,
                 }}
                 width="24"
                 height="24"
@@ -137,64 +127,147 @@ export default function Navbar() {
               </motion.svg>
             </motion.div>
           </button>
-        </div>
 
-        {/* =========================
-            MOBILE NAVIGATION
-        ========================= */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              className="mobile-nav"
-              initial={{
-                opacity: 0,
-                y: -20,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              exit={{
-                opacity: 0,
-                y: -20,
-              }}
-              transition={{
-                duration: 0.2,
+          {/* =================================================
+              DESKTOP NAVIGATION
+          ================================================= */}
+
+          <nav className="desktop-nav">
+            <a href="#beranda">Beranda</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+          </nav>
+
+          {/* =================================================
+              LOGO
+          ================================================= */}
+
+          <div className="logo">
+            <h2>PORTFOLIO</h2>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* =====================================================
+          MOBILE CIRCLE REVEAL
+      ===================================================== */}
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="mobile-menu-overlay"
+            initial={{
+              clipPath: "circle(0% at 28px 42px)",
+            }}
+            animate={{
+              clipPath: "circle(150% at 28px 42px)",
+            }}
+            exit={{
+              clipPath: "circle(0% at 28px 42px)",
+            }}
+            transition={{
+              duration: 0.65,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {/* =================================================
+                MENU CONTENT
+            ================================================= */}
+
+            <motion.nav
+              className="mobile-menu-content"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    delayChildren: 0.25,
+                    staggerChildren: 0.09,
+                  },
+                },
               }}
             >
-              <a
+              <MobileMenuItem
                 href="#beranda"
-                onClick={() => setIsOpen(false)}
-              >
-                Beranda
-              </a>
+                label="Beranda"
+                onClick={closeMenu}
+              />
 
-              <a
+              <MobileMenuItem
                 href="#about"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </a>
+                label="About"
+                onClick={closeMenu}
+              />
 
-              <a
+              <MobileMenuItem
                 href="#projects"
-                onClick={() => setIsOpen(false)}
-              >
-                Projects
-              </a>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.header>
+                label="Projects"
+                onClick={closeMenu}
+              />
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <StyleSheet />
     </>
   );
 }
 
+/* =========================================================
+   MOBILE MENU ITEM
+========================================================= */
+
+function MobileMenuItem({ href, label, onClick }) {
+  return (
+    <motion.a
+      href={href}
+      onClick={onClick}
+      variants={{
+        hidden: {
+          opacity: 0,
+          x: -30,
+        },
+        visible: {
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.45,
+            ease: [0.22, 1, 0.36, 1],
+          },
+        },
+      }}
+      whileHover={{
+        x: 8,
+      }}
+      whileTap={{
+        scale: 0.97,
+      }}
+    >
+      {label}
+    </motion.a>
+  );
+}
+
+/* =========================================================
+   STYLES
+========================================================= */
+
 function StyleSheet() {
   return (
     <style>{`
+
+      /* =====================================================
+         FONT
+      ===================================================== */
+
+      @import url(
+        "https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap"
+      );
+
+
       /* =====================================================
          HEADER
       ===================================================== */
@@ -212,20 +285,21 @@ function StyleSheet() {
 
         border-bottom: 1px solid #1d2628;
 
-        z-index: 100;
+        z-index: 200;
 
         pointer-events: auto;
 
         backdrop-filter: blur(12px);
-
-        transition: z-index 0s;
       }
+
 
       /* =====================================================
          HEADER CONTENT
       ===================================================== */
 
       .header-content {
+        position: relative;
+
         max-width: 1200px;
 
         margin: 0 auto;
@@ -239,7 +313,12 @@ function StyleSheet() {
         justify-content: space-between;
 
         padding: 0 40px;
+
+        box-sizing: border-box;
+
+        font-family: "Caveat", cursive;
       }
+
 
       /* =====================================================
          LOGO
@@ -251,16 +330,43 @@ function StyleSheet() {
         align-items: center;
 
         color: #f5f5f5;
+
+        position: relative;
+
+        z-index: 202;
       }
 
+      .logo h2 {
+        margin: 0;
+
+        font-family: "Caveat", cursive;
+
+        font-size: 1.8rem;
+
+        font-weight: 700;
+
+        letter-spacing: 0.5px;
+      }
+
+
       /* =====================================================
-         DESKTOP NAV
+         DESKTOP NAVIGATION
       ===================================================== */
 
       .desktop-nav {
+        position: absolute;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
         display: flex;
 
-        gap: 32px;
+        align-items: center;
+
+        gap: 40px;
+
+        z-index: 202;
       }
 
       .desktop-nav a {
@@ -268,9 +374,13 @@ function StyleSheet() {
 
         text-decoration: none;
 
-        font-size: 14px;
+        font-family: "Caveat", cursive;
 
-        opacity: 0.7;
+        font-size: 1.35rem;
+
+        font-weight: 600;
+
+        opacity: 0.75;
 
         transition:
           opacity 0.2s ease,
@@ -280,8 +390,9 @@ function StyleSheet() {
       .desktop-nav a:hover {
         opacity: 1;
 
-        transform: translateY(-1px);
+        transform: translateY(-2px);
       }
+
 
       /* =====================================================
          MOBILE TOGGLE
@@ -294,22 +405,24 @@ function StyleSheet() {
 
         border: none;
 
-        cursor: pointer;
-
         padding: 0;
 
         width: 32px;
+
         height: 32px;
 
         position: relative;
 
-        z-index: 1;
+        z-index: 300;
+
+        cursor: pointer;
 
         pointer-events: auto;
       }
 
       .icon-container {
         width: 100%;
+
         height: 100%;
 
         display: flex;
@@ -319,22 +432,86 @@ function StyleSheet() {
         justify-content: center;
 
         position: relative;
+
+        pointer-events: none;
       }
 
       .icon-svg {
         position: absolute;
 
         top: 4px;
+
         left: 4px;
+
+        pointer-events: none;
       }
+
 
       /* =====================================================
-         MOBILE NAV
+         MOBILE CIRCLE OVERLAY
       ===================================================== */
 
-      .mobile-nav {
-        display: none;
+      .mobile-menu-overlay {
+        position: fixed;
+
+        inset: 0;
+
+        width: 100vw;
+
+        height: 100dvh;
+
+        background: #e7e5ee;
+
+        z-index: 150;
+
+        overflow: hidden;
+
+        font-family: "Caveat", cursive;
       }
+
+
+      /* =====================================================
+         MOBILE MENU CONTENT
+      ===================================================== */
+
+      .mobile-menu-content {
+        position: absolute;
+
+        left: 30px;
+
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+      }
+
+      .mobile-menu-content a {
+        color: #12121a;
+
+        text-decoration: none;
+
+        font-family: "Caveat", cursive;
+
+        font-size: 3rem;
+
+        line-height: 1;
+
+        font-weight: 600;
+
+        letter-spacing: 0.5px;
+
+        opacity: 0.9;
+
+        cursor: pointer;
+      }
+
 
       /* =====================================================
          MOBILE
@@ -344,31 +521,19 @@ function StyleSheet() {
 
         .header {
           padding-top: 14px;
+
+          z-index: 200;
         }
 
         .header-content {
           height: 56px;
 
           padding: 0 20px;
-
-          /*
-           * Burger kiri
-           * Portfolio kanan
-           */
-          justify-content: space-between;
         }
 
-        /* -----------------------------------------------
-           LOGO -> KANAN
-        ----------------------------------------------- */
-
-        .logo {
-          order: 2;
-          transform: translateX(-30px);
-        }
 
         /* -----------------------------------------------
-           BURGER -> KIRI
+           BURGER KIRI
         ----------------------------------------------- */
 
         .mobile-toggle {
@@ -377,66 +542,48 @@ function StyleSheet() {
           order: 1;
         }
 
+
         /* -----------------------------------------------
-           HIDE DESKTOP NAV
+           DESKTOP NAV HIDDEN
         ----------------------------------------------- */
 
         .desktop-nav {
           display: none;
         }
 
+
         /* -----------------------------------------------
-           MOBILE NAV
+           PORTFOLIO KANAN
         ----------------------------------------------- */
 
-        .mobile-nav {
-          display: flex;
+        .logo {
+          order: 2;
 
-          flex-direction: column;
-
-          background: rgba(5, 5, 5, 0.95);
-
-          border-top: 1px solid #1d2628;
-
-          border-bottom: 1px solid #1d2628;
-
-          padding: 20px;
-
-          gap: 20px;
-
-          align-items: center;
-
-          backdrop-filter: blur(12px);
+          transform: translateX(-30px);
         }
 
-        .mobile-nav a {
-          color: #f5f5f5;
-
-          text-decoration: none;
-
-          font-size: 15px;
-
-          font-weight: 500;
-
-          opacity: 0.8;
-
-          transition:
-            opacity 0.2s ease,
-            transform 0.2s ease;
-
-          width: 100%;
-
-          text-align: center;
-
-          padding: 10px 0;
+        .logo h2 {
+          font-size: 1.8rem;
         }
 
-        .mobile-nav a:hover {
-          opacity: 1;
 
-          transform: translateY(-1px);
+        /* -----------------------------------------------
+           MENU
+        ----------------------------------------------- */
+
+        .mobile-menu-content {
+          left: 30px;
+
+          top: 50%;
+      
+          gap: 18px;
+        }
+
+        .mobile-menu-content a {
+          font-size: 3.2rem;
         }
       }
+
 
       /* =====================================================
          VERY SMALL MOBILE
@@ -448,11 +595,23 @@ function StyleSheet() {
           padding: 0 16px;
         }
 
-        .logo h2 {
-          font-size: 1.35rem !important;
+        .logo {
+          transform: translateX(-20px);
         }
 
+        .logo h2 {
+          font-size: 1.6rem;
+        }
+
+        .mobile-menu-content {
+          left: 24px;
+        }
+
+        .mobile-menu-content a {
+          font-size: 2.8rem;
+        }
       }
+
     `}</style>
   );
 }
