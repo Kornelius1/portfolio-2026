@@ -71,7 +71,7 @@ const iconMap = {
 
 export default function CanvasRevealEffectDemo() {
   return (
-    <div className="py-20 bg-[#050505] w-full min-h-screen px-8">
+    <div className="py-20 bg-[#12121a] w-full min-h-screen px-8">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center text-white mb-16">
           Tech Stack & Skills

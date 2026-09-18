@@ -6,7 +6,7 @@ import { FiExternalLink } from "react-icons/fi";
 // tempat data project diinisiasikan
 export default function Projects() {
   return (
-    <div className="py-20 bg-[#050505] w-full px-8">
+    <div className="py-20 bg-[#12121a] w-full px-8">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center text-white mb-16">
           Featured Projects
