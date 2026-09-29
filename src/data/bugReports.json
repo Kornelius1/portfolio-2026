@@ -1,0 +1,62 @@
+{
+  "reports": [
+    {
+      "id": 1,
+      "title": "Inaccurate \"-55%\" Discount Label on Product Detail Page (Actually 51%)",
+      "type": "Content Bug",
+      "severity": null,
+      "video": "/videos/bug-report-1.mp4",
+      "steps": [
+        "Buka aplikasi atau platform Shopee.",
+        "Cari produk yang memiliki potongan diskon. Pada tes ini, digunakan produk yang memiliki diskon -55% dengan harga asli produk atau harga coret sebesar Rp 44.000.",
+        "Klik Produk yang memiliki potongan diskon tersebut.",    
+        "Amati harga akhir setelah diskon yang tertera di halaman detail produk, yaitu Rp 21.560."
+      ],
+      "actualResult": "Teks label promosi tertulis -55%, padahal secara matematis harga Rp 21.560 dari Rp 44.000 merupakan potongan sebesar 51%.",
+      "expectedResult": "Teks atau konten label diskon pada produk harus menampilkan persentase yang akurat sesuai kalkulasi harga riil, yaitu tertera -51% (bukan -55%). Jika diskon memang seharusnya sebesar -55%, maka harga akhirnya seharusnya bernilai Rp 19.800."
+    },
+    {
+      "id": 2,
+      "title": "Price Discrepancy for Bulk Items: Fluctuating Unit Prices in Shopping Cart Revert to Normal Price at Checkout Page",
+      "type": "Functional Bug",
+      "severity": "High",
+      "video": "/videos/bug-report-2.mp4",
+      "steps": [
+        "Buka aplikasi atau platform Shopee.",
+        "Pilih dan klik produk seharga Rp 21.560.",
+        "Pada bagian bawah halaman klik tombol 'Beli Sekarang'",
+        "Pilih varian Peace Land dengan ukuran 20 ML",
+        "Ubah kuantitas item secara bertahap dan amati perubahan harga satuan produk.",
+        "Centang produk dengan kuantitas 40 pcs, lalu klik tombol 'Beli Sekarang'."
+      ],
+      "priceChanges": [
+        {
+          "quantity": 2,
+          "unitPrice": "Rp 20.482"
+        },
+        {
+          "quantity": 10,
+          "unitPrice": "Rp 19.835"
+        },
+        {
+          "quantity": 15,
+          "unitPrice": "Rp 18.973"
+        },
+        {
+          "quantity": 20,
+          "unitPrice": "Rp 18.973"
+        },
+        {
+          "quantity": 39,
+          "unitPrice": "Rp 18.996"
+        },
+        {
+          "quantity": 40,
+          "unitPrice": "Rp 19.060"
+        }
+      ],
+      "actualResult": "Sistem mengalami glitch kalkulasi harga di mana harga satuan produk terus berfluktuasi secara tidak konsisten di halaman keranjang belanja saat jumlah item ditambah. Lebih lanjut, saat masuk ke halaman checkout (40 pcs), harga satuan murah Rp 19.060 tersebut hangus total dan kembali ke tarif dasar Rp 21.560, sehingga total tagihan membengkak menjadi Rp 862.400 (40 x 21.560).",
+      "expectedResult": "Sistem perhitungan harga harus konsisten. Harga satuan produk yang sudah dikalkulasikan dan dijanjikan di halaman keranjang belanja (Rp 19.060 untuk 40 pcs) harus diteruskan dan diterapkan dengan benar hingga halaman pembayaran akhir, sehingga total tagihan produk yang valid adalah Rp 762.400 (40 x 19.060)."
+    }
+  ]
+}
