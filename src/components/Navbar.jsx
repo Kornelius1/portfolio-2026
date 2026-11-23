@@ -6,6 +6,7 @@ import {
   useMotionValueEvent,
   AnimatePresence,
 } from "motion/react";
+
 import { useState } from "react";
 
 export default function Navbar() {

@@ -327,7 +327,7 @@ body {
      */
     z-index: 110;
 
-    pointer-events: auto;
+    pointer-events: none;
   }
 
   /* =========================
