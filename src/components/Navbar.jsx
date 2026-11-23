@@ -123,8 +123,8 @@ export default function Navbar() {
           >
             <nav className="mobile-menu-content">
               <a href="/#beranda" onClick={closeMenu}>Beranda</a>
-              <a href="/#about" onClick={closeMenu}>About</a>
-              <a href="/#projects" onClick={closeMenu}>Projects</a>
+              {/* <a href="/#about" onClick={closeMenu}>About</a>
+              <a href="/#projects" onClick={closeMenu}>Projects</a> */}
               <a href="/qa" onClick={closeMenu}>QA Portfolio</a>
             </nav>
           </motion.div>
