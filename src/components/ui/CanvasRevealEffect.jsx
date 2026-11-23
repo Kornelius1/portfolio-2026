@@ -4,10 +4,14 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
+const DEFAULT_COLORS = [[0, 255, 255]];
+const DEFAULT_OPACITIES = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1];
+const DEFAULT_CENTER = ["x", "y"];
+
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
-  opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
-  colors = [[0, 255, 255]],
+  opacities = DEFAULT_OPACITIES,
+  colors = DEFAULT_COLORS,
   containerClassName,
   dotSize,
   showGradient = true,
@@ -16,18 +20,16 @@ export const CanvasRevealEffect = ({
     <div className={cn("h-full relative bg-white w-full", containerClassName)}>
       <div className="h-full w-full">
         <DotMatrix
-          colors={colors ?? [[0, 255, 255]]}
+          colors={colors}
           dotSize={dotSize ?? 3}
-          opacities={
-            opacities ?? [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]
-          }
+          opacities={opacities}
           shader={`
               float animation_speed_factor = ${animationSpeed.toFixed(1)};
               float intro_offset = distance(u_resolution / 2.0 / u_total_size, st2) * 0.01 + (random(st2) * 0.15);
               opacity *= step(intro_offset, u_time * animation_speed_factor);
               opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);
             `}
-          center={["x", "y"]}
+          center={DEFAULT_CENTER}
         />
       </div>
       {showGradient && (
@@ -37,13 +39,19 @@ export const CanvasRevealEffect = ({
   );
 };
 
+const DM_COLORS = [[0, 0, 0]];
+const DM_OPACITIES = [
+  0.04, 0.04, 0.04, 0.04, 0.04, 0.08, 0.08, 0.08, 0.08, 0.14,
+];
+const DM_CENTER = ["x", "y"];
+
 const DotMatrix = ({
-  colors = [[0, 0, 0]],
-  opacities = [0.04, 0.04, 0.04, 0.04, 0.04, 0.08, 0.08, 0.08, 0.08, 0.14],
+  colors = DM_COLORS,
+  opacities = DM_OPACITIES,
   totalSize = 4,
   dotSize = 2,
   shader = "",
-  center = ["x", "y"],
+  center = DM_CENTER,
 }) => {
   const uniforms = React.useMemo(() => {
     let colorsArray = [
@@ -155,29 +163,21 @@ const DotMatrix = ({
   );
 };
 
-const ShaderMaterial = ({
-  source,
-  uniforms,
-  maxFps = 60,
-}) => {
+const ShaderMaterial = ({ source, uniforms, maxFps = 60 }) => {
   const { size } = useThree();
   const ref = useRef();
-  let lastFrameTime = 0;
+  const lastFrameTime = useRef(0);
 
   useFrame(({ clock }) => {
     if (!ref.current) return;
     const timestamp = clock.getElapsedTime();
-    if (timestamp - lastFrameTime < 1 / maxFps) {
-      return;
-    }
-    lastFrameTime = timestamp;
+    if (timestamp - lastFrameTime.current < 1 / maxFps) return;
+    lastFrameTime.current = timestamp;
 
-    const material = ref.current.material;
-    const timeLocation = material.uniforms.u_time;
-    timeLocation.value = timestamp;
+    ref.current.material.uniforms.u_time.value = timestamp;
   });
 
-  const getUniforms = () => {
+  const material = useMemo(() => {
     const preparedUniforms = {};
 
     for (const uniformName in uniforms) {
@@ -198,9 +198,7 @@ const ShaderMaterial = ({
           break;
         case "uniform3fv":
           preparedUniforms[uniformName] = {
-            value: uniform.value.map((v) =>
-              new THREE.Vector3().fromArray(v)
-            ),
+            value: uniform.value.map((v) => new THREE.Vector3().fromArray(v)),
             type: "3fv",
           };
           break;
@@ -219,12 +217,9 @@ const ShaderMaterial = ({
     preparedUniforms["u_time"] = { value: 0, type: "1f" };
     preparedUniforms["u_resolution"] = {
       value: new THREE.Vector2(size.width * 2, size.height * 2),
-    }; 
-    return preparedUniforms;
-  };
+    };
 
-  const material = useMemo(() => {
-    const materialObject = new THREE.ShaderMaterial({
+    return new THREE.ShaderMaterial({
       vertexShader: `
       precision mediump float;
       in vec2 coordinates;
@@ -239,15 +234,13 @@ const ShaderMaterial = ({
       }
       `,
       fragmentShader: source,
-      uniforms: getUniforms(),
+      uniforms: preparedUniforms,
       glslVersion: THREE.GLSL3,
       blending: THREE.CustomBlending,
       blendSrc: THREE.SrcAlphaFactor,
       blendDst: THREE.OneFactor,
     });
-
-    return materialObject;
-  }, [size.width, size.height, source]);
+  }, [size.width, size.height, source, uniforms]);
 
   return (
     <mesh ref={ref}>

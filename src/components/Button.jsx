@@ -5,7 +5,7 @@ const Button = () => {
   return (
     <MagneticButton strength={0.3} maxDistance={50}>
       <a
-        href="/pdf/KorneliusJonathanCV.pdf"
+        href="/public/pdf/CV_IT Programmer_Kornelius Jonathan.pdf"
         download="CV_Kornelius_Jonathan.pdf"
         className="btn-download"
       >

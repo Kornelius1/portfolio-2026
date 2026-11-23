@@ -11,6 +11,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 function QAPage() {
+  const MAX_PDF_WIDTH = 800;
   const pdfContainerRef = useRef(null);
   const [pdfWidth, setPdfWidth] = useState(0);
   const [numPages, setNumPages] = useState(null);
@@ -18,7 +19,10 @@ function QAPage() {
   useEffect(() => {
     const updatePdfWidth = () => {
       if (pdfContainerRef.current) {
-        setPdfWidth(pdfContainerRef.current.clientWidth);
+        const style = getComputedStyle(pdfContainerRef.current);
+        const padding =
+          parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        setPdfWidth(pdfContainerRef.current.clientWidth - padding);
       }
     };
 
@@ -57,7 +61,7 @@ function QAPage() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
             {/* Header */}
             <div className="flex flex-col gap-4 border-b border-gray-200 p-6 md:flex-row md:items-center md:justify-between">
               <div>
@@ -84,7 +88,7 @@ function QAPage() {
             {/* PDF Preview */}
             <div
               ref={pdfContainerRef}
-              className="max-h-[700px] w-full overflow-auto bg-white p-3 sm:p-6"
+              className="max-h-[500px] w-full overflow-auto bg-gray-100 p-3 sm:p-6"
             >
               {pdfWidth > 0 && (
                 <Document
@@ -96,7 +100,7 @@ function QAPage() {
                       <Page
                         key={`page_${index + 1}`}
                         pageNumber={index + 1}
-                        width={pdfWidth}
+                        width={Math.min(pdfWidth, MAX_PDF_WIDTH)}
                         renderTextLayer
                         renderAnnotationLayer
                       />

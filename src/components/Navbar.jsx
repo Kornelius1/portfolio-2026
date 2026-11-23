@@ -101,8 +101,8 @@ export default function Navbar() {
 
           <nav className="desktop-nav">
             <a href="/#beranda">Beranda</a>
-            <a href="/#about">About</a>
-            <a href="/#projects">Projects</a>
+            {/* <a href="/#about">About</a>
+            <a href="/#projects">Projects</a> */}
             <a href="/qa">QA Portfolio</a>
           </nav>
 

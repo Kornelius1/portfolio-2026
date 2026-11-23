@@ -166,6 +166,10 @@ export default function Lanyard({
   );
 }
 
+const configureLanyardTexture = (t) => {
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.needsUpdate = true;
+};
 // =========================
 // BAND
 // =========================
@@ -202,7 +206,7 @@ function Band({
 
   const { nodes, materials } = useGLTF(cardGLB);
 
-  const texture = useTexture(lanyardImage || lanyard);
+  const texture = useTexture(lanyardImage || lanyard, configureLanyardTexture);
 
   const frontTex = useTexture(frontImage || BLANK_PIXEL);
 
@@ -293,15 +297,16 @@ function Band({
   // CURVE
   // =========================
 
-  const [curve] = useState(
-    () =>
-      new THREE.CatmullRomCurve3([
-        new THREE.Vector3(),
-        new THREE.Vector3(),
-        new THREE.Vector3(),
-        new THREE.Vector3(),
-      ]),
-  );
+  const [curve] = useState(() => {
+    const c = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(),
+      new THREE.Vector3(),
+      new THREE.Vector3(),
+      new THREE.Vector3(),
+    ]);
+    c.curveType = "chordal";
+    return c;
+  });
 
   const [dragged, drag] = useState(false);
 
@@ -399,10 +404,6 @@ function Band({
       });
     }
   });
-
-  curve.curveType = "chordal";
-
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
   // =========================
   // RENDER
