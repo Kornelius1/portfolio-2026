@@ -1,38 +1,40 @@
 import { FaDownload } from "react-icons/fa";
 import bugReports from "../data/bugReports.json";
 import { Document, Page, pdfjs } from "react-pdf";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
+import { motion } from "motion/react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url,
 ).toString();
 
+const MAX_PDF_WIDTH = 800;
+const pdfOptions = { verbosity: 0 };
+
 function QAPage() {
-  const MAX_PDF_WIDTH = 800;
   const pdfContainerRef = useRef(null);
   const [pdfWidth, setPdfWidth] = useState(0);
-  const [numPages, setNumPages] = useState(null);
+  const [numPages, setNumPages] = useState(0);
 
-  useEffect(() => {
-    const updatePdfWidth = () => {
-      if (pdfContainerRef.current) {
-        const style = getComputedStyle(pdfContainerRef.current);
-        const padding =
-          parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-        setPdfWidth(pdfContainerRef.current.clientWidth - padding);
-      }
+  useLayoutEffect(() => {
+    const el = pdfContainerRef.current;
+    if (!el) return;
+
+    const measure = () => {
+      const style = getComputedStyle(el);
+      const padding =
+        parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+      const next = Math.floor(el.clientWidth - padding);
+      setPdfWidth((prev) => (Math.abs(prev - next) > 8 ? next : prev));
     };
 
-    updatePdfWidth();
-
-    window.addEventListener("resize", updatePdfWidth);
-
-    return () => {
-      window.removeEventListener("resize", updatePdfWidth);
-    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -40,11 +42,13 @@ function QAPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 px-12 pb-24 pt-48 text-gray-900">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25 }}
+      className="min-h-screen bg-gray-50 px-12 pb-24 pt-48 text-gray-900"
+    >
       <div className="w-full">
-        {/* ========================= */}
-        {/* TEST CASE */}
-        {/* ========================= */}
         <section className="mb-20">
           <div className="mb-8">
             <span className="text-sm font-semibold uppercase tracking-wider text-sky-600">
@@ -62,7 +66,6 @@ function QAPage() {
           </div>
 
           <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-            {/* Header */}
             <div className="flex flex-col gap-4 border-b border-gray-200 p-6 md:flex-row md:items-center md:justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
@@ -85,24 +88,25 @@ function QAPage() {
               </a>
             </div>
 
-            {/* PDF Preview */}
             <div
               ref={pdfContainerRef}
-              className="max-h-[500px] w-full overflow-auto bg-gray-100 p-3 sm:p-6"
+              className="h-[500px] w-full overflow-auto bg-gray-100 p-3 sm:p-6"
             >
               {pdfWidth > 0 && (
                 <Document
                   file="/pdf/test-cases.pdf"
+                  options={pdfOptions}
                   onLoadSuccess={onDocumentLoadSuccess}
+                  loading={<div className="h-[400px]" />}
                 >
                   <div className="flex flex-col items-center gap-6">
-                    {Array.from(new Array(numPages), (_, index) => (
+                    {Array.from({ length: numPages }, (_, index) => (
                       <Page
                         key={`page_${index + 1}`}
                         pageNumber={index + 1}
                         width={Math.min(pdfWidth, MAX_PDF_WIDTH)}
                         renderTextLayer
-                        renderAnnotationLayer
+                        renderAnnotationLayer={false}
                       />
                     ))}
                   </div>
@@ -112,9 +116,6 @@ function QAPage() {
           </div>
         </section>
 
-        {/* ========================= */}
-        {/* BUG REPORT */}
-        {/* ========================= */}
         <section>
           <div className="mb-8">
             <span className="text-sm font-semibold uppercase tracking-wider text-sky-600">
@@ -137,9 +138,6 @@ function QAPage() {
                 key={report.id}
                 className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200"
               >
-                {/* ========================= */}
-                {/* REPORT HEADER */}
-                {/* ========================= */}
                 <div className="border-b border-gray-200 px-6 py-5">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
@@ -166,16 +164,9 @@ function QAPage() {
                   </div>
                 </div>
 
-                {/* ========================= */}
-                {/* DESCRIPTION + VIDEO */}
-                {/* ========================= */}
                 <div className="grid grid-cols-1 lg:grid-cols-3">
-                  {/* ========================= */}
-                  {/* DESCRIPTION LIST */}
-                  {/* ========================= */}
                   <div className="px-6 lg:col-span-2">
                     <dl className="divide-y divide-gray-100">
-                      {/* Title */}
                       <div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                           Title Bug
@@ -186,7 +177,6 @@ function QAPage() {
                         </dd>
                       </div>
 
-                      {/* Bug Type */}
                       <div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                           Bug Type
@@ -197,7 +187,6 @@ function QAPage() {
                         </dd>
                       </div>
 
-                      {/* Severity */}
                       {report.severity && (
                         <div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
                           <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -210,7 +199,6 @@ function QAPage() {
                         </div>
                       )}
 
-                      {/* Steps */}
                       <div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                           Step to Reproduce Bug
@@ -225,7 +213,6 @@ function QAPage() {
                         </dd>
                       </div>
 
-                      {/* Price Changes */}
                       {report.priceChanges && (
                         <div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
                           <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -266,7 +253,6 @@ function QAPage() {
                         </div>
                       )}
 
-                      {/* Actual Result */}
                       <div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                           Actual Result
@@ -277,7 +263,6 @@ function QAPage() {
                         </dd>
                       </div>
 
-                      {/* Expected Result */}
                       <div className="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
                           Expected Result
@@ -290,9 +275,6 @@ function QAPage() {
                     </dl>
                   </div>
 
-                  {/* ========================= */}
-                  {/* VIDEO EVIDENCE */}
-                  {/* ========================= */}
                   {report.video && (
                     <div className="border-t border-gray-200 bg-gray-50 p-6 lg:border-l lg:border-t-0">
                       <div className="sticky top-28">
@@ -323,7 +305,7 @@ function QAPage() {
           </div>
         </section>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
