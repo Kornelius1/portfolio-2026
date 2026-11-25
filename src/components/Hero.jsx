@@ -1,11 +1,22 @@
-  //https://uiverse.io/sahilxkhadka/rotten-grasshopper-44
+import { lazy, Suspense, useEffect, useState } from "react";
+import "../css/Hero.css";
+import Button from "./Button";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-  import "../css/Hero.css";
-  import Button from "./Button";
-  import Lanyard from "./Lanyard/Lanyard";
-  import { FaGithub, FaLinkedin } from "react-icons/fa";
+const Lanyard = lazy(() => import("./Lanyard/Lanyard"));
 
   function Hero() {
+    const [showLanyard, setShowLanyard] = useState(false);
+
+    useEffect(() => {
+      const start = () => setShowLanyard(true);
+      if ("requestIdleCallback" in window) {
+        const id = requestIdleCallback(start, { timeout: 1500 });
+        return () => cancelIdleCallback(id);
+      }
+      const id = setTimeout(start, 300);
+      return () => clearTimeout(id);
+    }, []);
     return (
       <section className="hero-container">
         {/* Kolom Kiri: Teks Portofolio */}
@@ -113,16 +124,19 @@
           </div>
         </div>
 
-        {/* Kolom Kanan: Profile Card dari React Bits */}
         <div className="hero-lanyard">
-          <Lanyard
-            position={[0, 0, 15]}
-            gravity={[0, -40, 0]}
-            fov={20}
-            frontImage="/project-images/FotoProfil.png"
-            backImage="/project-images/FotoProfil.png"
-            imageFit="cover"
-          />
+          {showLanyard && (
+            <Suspense fallback={null}>
+              <Lanyard
+                position={[0, 0, 15]}
+                gravity={[0, -40, 0]}
+                fov={20}
+                frontImage="/project-images/FotoProfil.png"
+                backImage="/project-images/FotoProfil.png"
+                imageFit="cover"
+              />
+            </Suspense>
+          )}
         </div>
       </section>
     );

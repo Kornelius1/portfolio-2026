@@ -88,28 +88,18 @@ export default function Lanyard({
     <div
       className="lanyard-container"
       style={{
-        height: isMobile ? "128vh" : "100vh",
-
-        /*
-         * Lanyard tetap berada secara visual
-         * di atas navbar.
-         */
+        height: "100%",
         position: "relative",
         zIndex: 200,
-
-        /*
-         * Canvas tidak menjadi penghalang
-         * terhadap navbar.
-         */
         pointerEvents: "none",
       }}
     >
       <Canvas
+        className="lanyard-canvas"
+        style={{ pointerEvents: "auto", touchAction: "none" }}
         camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: transparent }}
-        eventSource={document.getElementById("root")}
-        eventPrefix="client"
         onCreated={({ gl }) =>
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
         }
