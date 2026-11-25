@@ -7,13 +7,22 @@ import {
   AnimatePresence,
 } from "motion/react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import "../css/Navbar.css";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const { scrollY } = useScroll();
 
   const [hidden, setHidden] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.dataset.menuOpen = isOpen ? "true" : "false";
+    return () => {
+      delete document.body.dataset.menuOpen;
+    };
+  }, [isOpen]);
 
   useMotionValueEvent(scrollY, "change", (current) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -23,11 +32,7 @@ export default function Navbar() {
       return;
     }
 
-    if (current > previous && current > 150) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
+    setHidden(current > previous && current > 150);
   });
 
   const toggleMenu = () => {
@@ -35,22 +40,14 @@ export default function Navbar() {
     setHidden(false);
   };
 
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <>
       <motion.header
         className="header"
-        animate={{
-          y: hidden ? -140 : 0,
-          opacity: hidden ? 0 : 1,
-        }}
-        transition={{
-          duration: 0.3,
-          ease: "easeInOut",
-        }}
+        animate={{ y: hidden ? -140 : 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         <div className="header-content">
           <button
@@ -101,10 +98,8 @@ export default function Navbar() {
           </button>
 
           <nav className="desktop-nav">
-            <a href="/#beranda">Beranda</a>
-            {/* <a href="/#about">About</a>
-            <a href="/#projects">Projects</a> */}
-            <a href="/qa">QA Portfolio</a>
+            <Link to="/#home">Home</Link>
+            <Link to="/qa">QA Portfolio</Link>
           </nav>
 
           <div className="logo">
@@ -115,197 +110,36 @@ export default function Navbar() {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            className="mobile-menu-overlay"
-            initial={{ clipPath: "circle(0% at 28px 42px)" }}
-            animate={{ clipPath: "circle(150% at 28px 42px)" }}
-            exit={{ clipPath: "circle(0% at 28px 42px)" }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <nav className="mobile-menu-content">
-              <a href="/#beranda" onClick={closeMenu}>Beranda</a>
-              {/* <a href="/#about" onClick={closeMenu}>About</a>
-              <a href="/#projects" onClick={closeMenu}>Projects</a> */}
-              <a href="/qa" onClick={closeMenu}>QA Portfolio</a>
-            </nav>
-          </motion.div>
+          <div className="mobile-menu-overlay">
+            <motion.div
+              className="mobile-menu-circle"
+              initial={{ scale: 0 }}
+              animate={{
+                scale: 1,
+                transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+              }}
+              exit={{ scale: 0, transition: { duration: 0.3, ease: "easeIn" } }}
+            />
+            <motion.nav
+              className="mobile-menu-content"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: { duration: 0.3, delay: 0.15 },
+              }}
+              exit={{ opacity: 0, transition: { duration: 0.12 } }}
+            >
+              <Link to="/#home" onClick={closeMenu}>
+                Home
+              </Link>
+              <Link to="/qa" onClick={closeMenu}>
+                QA Portfolio
+              </Link>
+            </motion.nav>
+          </div>
         )}
       </AnimatePresence>
-
-      <StyleSheet />
     </>
-  );
-}
-
-function StyleSheet() {
-  return (
-    <style>{`
-      @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap");
-
-      .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        padding-top: 20px;
-        background: rgba(5, 5, 5, 0.8);
-        border-bottom: 1px solid #1d2628;
-        z-index: 200;
-        pointer-events: auto;
-        backdrop-filter: blur(12px);
-      }
-
-      .header-content {
-        position: relative;
-        max-width: 1200px;
-        margin: 0 auto;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 40px;
-        box-sizing: border-box;
-        font-family: "Caveat", cursive;
-      }
-
-      .logo {
-        display: flex;
-        align-items: center;
-        color: #f5f5f5;
-        position: relative;
-        z-index: 202;
-      }
-
-      .logo h2 {
-        margin: 0;
-        font-family: "Caveat", cursive;
-        font-size: 1.8rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-      }
-
-      .desktop-nav {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        z-index: 202;
-      }
-
-      .desktop-nav a {
-        color: #f5f5f5;
-        text-decoration: none;
-        font-family: "Caveat", cursive;
-        font-size: 1.35rem;
-        font-weight: 600;
-        opacity: 0.75;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .desktop-nav a:hover {
-        opacity: 1;
-        transform: translateY(-2px);
-      }
-
-      .mobile-toggle {
-        display: none;
-        background: none;
-        border: none;
-        padding: 0;
-        width: 32px;
-        height: 32px;
-        position: relative;
-        z-index: 300;
-        cursor: pointer;
-        pointer-events: auto;
-      }
-
-      .icon-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        pointer-events: none;
-      }
-
-      .icon-svg {
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        pointer-events: none;
-      }
-
-      .mobile-menu-overlay {
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-        height: 100dvh;
-        background: #e7e5ee;
-        z-index: 150;
-        overflow: hidden;
-        font-family: "Caveat", cursive;
-      }
-
-      .mobile-menu-content {
-        position: absolute;
-        left: 30px;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .mobile-menu-content a {
-        color: #12121a;
-        text-decoration: none;
-        font-family: "Caveat", cursive;
-        font-size: 3rem;
-        line-height: 1;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        opacity: 0.9;
-        cursor: pointer;
-      }
-
-      @media (max-width: 768px) {
-        .header {
-          padding-top: 14px;
-        }
-
-        .header-content {
-          height: 56px;
-          padding: 0 20px;
-        }
-
-        .mobile-toggle {
-          display: block;
-          order: 1;
-        }
-
-        .desktop-nav {
-          display: none;
-        }
-
-        .logo {
-          order: 2;
-          transform: translateX(-30px);
-        }
-
-        .mobile-menu-content {
-          left: 30px;
-          gap: 18px;
-        }
-
-        .mobile-menu-content a {
-          font-size: 3.2rem;
-        }
-      }
-    `}</style>
   );
 }
