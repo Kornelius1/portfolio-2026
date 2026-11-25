@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FiHome, FiUser, FiFolder, FiBriefcase, FiCpu } from "react-icons/fi";
 
 const items = [
-  { id: "beranda", label: "Home", Icon: FiHome },
+  { id: "home", label: "Home", Icon: FiHome },
   { id: "about", label: "About", Icon: FiUser },
   { id: "projects", label: "Projects", Icon: FiFolder },
   { id: "experience", label: "Experience", Icon: FiBriefcase },
@@ -40,7 +40,7 @@ export default function SideNav() {
   return (
     <nav
       aria-label="Navigasi section"
-      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-1/2 z-[210] -translate-x-1/2 md:bottom-auto md:left-4 md:top-1/2 md:translate-x-0 md:-translate-y-1/2"
+      className="side-nav fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-1/2 z-[210] -translate-x-1/2 md:bottom-auto md:left-4 md:top-1/2 md:translate-x-0 md:-translate-y-1/2"
     >
       <ul className="flex flex-row gap-1 rounded-full bg-white/10 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl backdrop-saturate-150 md:flex-col md:p-2">
         {items.map((item) => {
