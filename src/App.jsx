@@ -1,38 +1,79 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import StickyScrollRevealDemo from "./components/StickyScrollRevealDemo";
-import CanvasRevealEffectDemo from "./components/CanvasRevealEffectDemo";
-import { AnimatedExperiences } from "./components/AnimatedExperiences";
-import Projects from "./components/Projects";
 import Footer from "./components/Footer";
-import QAPage from "./components/QAPage";
 import SideNav from "./components/SideNav";
+import QAPage from "./components/QAPage";
 import "./index.css";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+const StickyScrollRevealDemo = lazy(
+  () => import("./components/StickyScrollRevealDemo"),
+);
+const CanvasRevealEffectDemo = lazy(
+  () => import("./components/CanvasRevealEffectDemo"),
+);
+const AnimatedExperiences = lazy(() =>
+  import("./components/AnimatedExperiences").then((m) => ({
+    default: m.AnimatedExperiences,
+  })),
+);
+const Projects = lazy(() => import("./components/Projects"));
+
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) {
+        el.scrollIntoView();
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
+
+  return null;
+}
+
+function SectionFallback() {
+  return <div style={{ minHeight: "100vh" }} />;
+}
 
 function HomePage() {
   return (
     <main>
       <SideNav />
 
-      <section id="beranda">
+      <section id="home">
         <Hero />
       </section>
 
       <section id="about">
-        <StickyScrollRevealDemo />
+        <Suspense fallback={<SectionFallback />}>
+          <StickyScrollRevealDemo />
+        </Suspense>
       </section>
 
       <section id="projects">
-        <Projects />
+        <Suspense fallback={<SectionFallback />}>
+          <Projects />
+        </Suspense>
       </section>
 
       <section id="experience">
-        <AnimatedExperiences />
+        <Suspense fallback={<SectionFallback />}>
+          <AnimatedExperiences />
+        </Suspense>
       </section>
 
       <section id="skills">
-        <CanvasRevealEffectDemo />
+        <Suspense fallback={<SectionFallback />}>
+          <CanvasRevealEffectDemo />
+        </Suspense>
       </section>
     </main>
   );
@@ -48,10 +89,13 @@ function App() {
       }}
     >
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/qa" element={<QAPage />} />
-      </Routes>
+      <ScrollManager />
+      <Suspense fallback={<SectionFallback />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/qa" element={<QAPage />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </div>
   );
